@@ -14,7 +14,7 @@ This is an Electron app and as such it does not need to use any bundler or file 
 
 To run:
 
-- Install latest node 8.x with npm
+- Install latest node 8.x and npm
 - `git clone` the repo
 - `cd` into repo
 - run `npm i`
