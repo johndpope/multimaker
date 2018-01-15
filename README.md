@@ -1,12 +1,8 @@
 # README #
 
-Maker-type game not based on any specific IP, but wants to follow the Metroidvania format.
+Inspired by recent "maker" projects such as Mario Maker and Mega Maker, this project continues the trend of specialized game content makers with "MM" abbreviations. No particular IP is being targeted, but the gameplay style should be similar to Metroid and the like.
 
-Other types of games using this format include Super Mario Maker and Mega Man Maker.
-
-### Progress Management
-
-Asana page: https://app.asana.com/0/523303564324416/list
+Asana: https://app.asana.com/0/523303564324416/list
 
 ### How do I get set up? ###
 
