@@ -1,28 +1,22 @@
-// @ts-check
-/// <reference path="../node_modules/phaser-ce/typescript/pixi.d.ts" />
-/// <reference path="../node_modules/phaser-ce/typescript/p2.d.ts" />
-/// <reference path="../node_modules/phaser-ce/typescript/phaser.d.ts" />
+require('phaser/dist/phaser')
 
-// See: https://github.com/photonstorm/phaser-ce#getting-started
+var config = {
+  type: Phaser.WEBGL,
+  parent: 'phaser-example',
+  width: 320,
+  height: 180,
+  scene: {
+    preload: preload,
+    create: create
+  }
+};
 
-// @ts-ignore
-window.PIXI = require('phaser-ce/build/custom/pixi')
+var game = new Phaser.Game(config);
 
-// @ts-ignore
-window.p2 = require('phaser-ce/build/custom/p2')
+function preload() {
+  
+}
 
-// @ts-ignore
-window.Phaser = require('phaser-ce/build/custom/phaser-split')
+function create() {
 
-const State0 = require('./State0');
-
-window.onload = () => {
-  const game = new Phaser.Game({
-    width: 320,
-    height: 180,
-    antialias: false,
-    transparent: true,
-    resolution: 2,
-    state: new State0()
-  })
 }

@@ -43,5 +43,3 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-// TODO: The rest of the app
