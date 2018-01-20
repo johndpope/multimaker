@@ -1,7 +1,7 @@
 { "height":100,
  "layers":[
         {
-         "image":"..\/..\/..\/assets\/antispace\/backgrounds\/bNAZb0.png",
+         "image":"..\/backgrounds\/bNAZb0.png",
          "name":"Image Layer 1",
          "opacity":1,
          "type":"imagelayer",
@@ -50,7 +50,7 @@
         {
          "columns":8,
          "firstgid":1,
-         "image":"..\/..\/..\/assets\/antispace\/tiles\/tsNAZ.png",
+         "image":"..\/tiles\/tsNAZ.png",
          "imageheight":256,
          "imagewidth":128,
          "margin":0,
