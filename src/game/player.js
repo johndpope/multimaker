@@ -1,5 +1,10 @@
 const Phaser = require('phaser/dist/phaser');
 
+/**
+ * Describes behavior of the player object.
+ * 
+ * Should NOT contain code that pertains to other objects or game-global data.
+ */
 module.exports = class Player {
   /**
    * @param {Phaser.Scene} scene 
@@ -15,10 +20,14 @@ module.exports = class Player {
     
     this.sprite = scene.physics.add.sprite(x, y, 'charles');
     this.sprite.body.setBounce(0);
+
+    // @todo: Abstract this out into a set of classes/properties that can be
+    //        controlled by the scene or another manager class
     this.cursors = scene.input.keyboard.createCursorKeys();
   }
 
   update() {
+    // @todo: Don't directly use keyboard/cursors for inputs (see note in const.)
     if (this.sprite.body.onFloor()) {
       this.sprite.body.setVelocityX(0);
       if (this.cursors.left.isDown) {

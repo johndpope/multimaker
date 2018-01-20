@@ -59,3 +59,8 @@ Describes the content of the main window and is where `renderer.js` is executed.
 
 #### `./src/style.css`
 Main stylesheet for index.html. At some point this file should probably be split up into smaller components.
+
+## Development Guidelines
+
+### Object Controller Classes
+Phaser doesn't seem to have any base class for game-specific object types. It's collection of "Game Object" classes are more like view primitives which are meant to be used indirectly by other objects. That means it is, apparently, up to the developer to come up with a scheme for organizing such logic. To me, this feels counterintuitive for a game engine. But I can see the advantages.
