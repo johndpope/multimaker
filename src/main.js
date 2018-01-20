@@ -10,9 +10,8 @@ let mainWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 640,
-    height: 360,
-    center: true,
+    width: 800,
+    height: 550,
     autoHideMenuBar: true,
   })
   mainWindow.loadURL(url.format({
