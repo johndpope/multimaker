@@ -8,9 +8,11 @@ module.exports = class Player {
    */
   constructor(scene, x, y) {
     this.scene = scene;
+    
     this.jumpPower = 0;
     this.jumpPowerInc = 10;
     this.jumpPowerMax = 200;
+    
     this.sprite = scene.physics.add.sprite(x, y, 'charles');
     this.sprite.body.setBounce(0);
     this.cursors = scene.input.keyboard.createCursorKeys();
