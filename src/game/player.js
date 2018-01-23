@@ -47,7 +47,7 @@ module.exports = class Player {
     /**
      * Maximum walking velocity on the ground
      */
-    this.walkSpeedMax = 100;
+    this.walkSpeedMax = 90;
     /**
      * Rate of accelleration when walking
      */
@@ -59,7 +59,7 @@ module.exports = class Player {
     /**
      * Maxumim allowed jump power
      */
-    this.jumpPowerMax = 200;
+    this.jumpPowerMax = 180;
     /**
      * Amount by which horizontal speed increases when leaping
      */

@@ -25,6 +25,9 @@ new Phaser.Game({
       const AS_SP = `${AS}/sprites`;
       this.load.atlas('charles', `${AS_SP}/charles.png`, `${AS_SP}/charles.json`);
       
+      const AS_AN = `${AS}/animations`;
+      this.load.animation('charlesAnim', `${AS_AN}/charles.json`);
+      
       const AS_TS = `${AS}/tiles`;
       this.load.image('tileset00', `${AS_TS}/tsNAZ.png`);
       
@@ -33,74 +36,6 @@ new Phaser.Game({
     }
     create() {
       this.cursors = this.input.keyboard.createCursorKeys();
-      this.anims.create({
-        key: 'stand',
-        frames:this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesStandGun_'
-        }),
-      });
-      this.anims.create({
-        key: 'walk',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesWalkGun_',
-          end: 8,
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'crawl',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesCrawl_',
-          end: 4,
-        }),
-        frameRate: 6,
-        repeat: -1,
-      });
-      this.anims.create({
-        key: 'slide',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesCrawl_',
-          start: 2,
-          end: 2
-        }),
-      });
-      this.anims.create({
-        key: 'duck',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesCrawl_',
-        }),
-      });
-      this.anims.create({
-        key: 'crouch',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesCrouch_'
-        }),
-      });
-      this.anims.create({
-        key: 'fall',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesFallGun_'
-        }),
-      });
-      this.anims.create({
-        key: 'fire',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesFireGun_'
-        }),
-      });
-      this.anims.create({
-        key: 'jump',
-        frames: this.anims.generateFrameNames('charles', {
-          prefix: 'sCharlesJumpGun_'
-        }),
-      });
-
-      this.inputs = {
-        left: false,
-        right: false,
-        crouch: false,
-      };
       
       this.player = new Player(this, 100, 50);
       

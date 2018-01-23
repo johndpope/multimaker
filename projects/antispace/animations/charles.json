@@ -1,0 +1,254 @@
+{
+  "anims": [
+    {
+      "key": "stand",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesStandGun_0",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 24,
+      "duration": 24,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "walk",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_0",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_1",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_2",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_3",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_4",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_5",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_6",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesWalkGun_7",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 13,
+      "duration": 0.6153846153846154,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": -1,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "crawl",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesCrawl_0",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesCrawl_1",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesCrawl_2",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "charles",
+          "frame": "sCharlesCrawl_3",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 6,
+      "duration": 0.6666666666666666,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": -1,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "slide",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesCrawl_2",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 24,
+      "duration": 24,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "duck",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesCrawl_0",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 24,
+      "duration": 24,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "crouch",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesCrouch_0",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 24,
+      "duration": 24,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "fall",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesFallGun_0",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 24,
+      "duration": 24,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "fire",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesFireGun_0",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 24,
+      "duration": 24,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "jump",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "charles",
+          "frame": "sCharlesJumpGun_0",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 24,
+      "duration": 24,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    }
+  ],
+  "globalTimeScale": 1
+}
