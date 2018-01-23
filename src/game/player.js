@@ -35,11 +35,11 @@ module.exports = class Player {
     /**
      * Height of player when standing
      */
-    this.heightStanding = 14;
+    this.heightStand = 14;
     /**
      * Height of player when crawling
      */
-    this.heightCrawling = 6;
+    this.heightCrawl = 6;
     /**
      * Width of player at all times
      */
@@ -94,7 +94,7 @@ module.exports = class Player {
     /**
      * Whether the player is currently crawling
      */
-    this.isCrawling = false;
+    this.isDucking = false;
 
     /**
      * Whether the player is currently sliding
@@ -133,22 +133,25 @@ module.exports = class Player {
   set vy(vy) {
     this.sprite.setVelocityY(vy);
   }
+  get isCrouching() {
+    return !!this.jumpPower;
+  }
 
   /**
    * @param {InputMap} inputs 
    */
   update(inputs) {
-    this.applyInputs(inputs);
-    if (!this.onFloor) {
-      this.fall();
-    }
-    this.updateAnimation();
-    return this;
+    return this
+      .updateInput(inputs)
+      .updateSlide()
+      .updateFall()
+      .updateShape()
+      .updateAnimation();
   }
   /**
    * @param {InputMap} inputs 
    */
-  applyInputs(inputs) {
+  updateInput(inputs) {
     this.facing = inputs.left ? 0 : inputs.right ? 1 : this.facing;
     
     if (!this.onFloor) {
@@ -156,10 +159,10 @@ module.exports = class Player {
     }
     
     if (inputs.down) {
-      if (!this.isCrawling && this.vx !== 0) {
+      if (!this.isDucking && this.vx !== 0) {
         this.isSliding = true;
       }
-      this.isCrawling = true;
+      this.isDucking = true;
       if (this.vx === 0) {
         this.isSliding = false;
       }
@@ -172,46 +175,90 @@ module.exports = class Player {
           this.stopCrawling();
         }
       }
-    } else if (inputs.jump) {
-      this.buildJump();
-      this.isSliding = true;
-    } else if (this.jumpPower !== 0) {
-      this.releaseJump();
-      if (this.vx !== 0) {
-        this.leap();
-      }
     } else {
       // @todo: Don't allow this if there is an object above
-      this.isCrawling = false; 
-      this.isSliding = false;
-    
-      if (inputs.left) {
-        this.walkLeft();
-      } else if (inputs.right) {
-        this.walkRight();
+      this.isDucking = false; 
+      
+      if (inputs.jump) {
+        this.buildJump();
+        this.isSliding = true;
+      } else if (this.jumpPower !== 0) {
+        this.releaseJump();
+        if (this.vx !== 0) {
+          this.leap();
+        }
       } else {
-        this.stopWalking();
+        this.isSliding = false;
+        if (inputs.left) {
+          this.walkLeft();
+        } else if (inputs.right) {
+          this.walkRight();
+        } else {
+          this.stopWalking();
+        }
       }
+    } 
+    return this;
+  }
+  updateSlide() {
+    if (!this.isSliding) {
+      return this;
     }
-    
-    if (this.isSliding) {
-      this.slide();
+    this.vx *= this.slideFactor;
+    if (Math.abs(this.vx) < this.slideBreak) {
+      this.isSliding = false;
+      this.vx = 0;
+    }
+    return this;
+  }
+  updateFall() {
+    if (this.onFloor) {
+      return this;
+    }
+    this.jumpPower = 0;
+    this.isDucking = false;
+    this.isSliding = false;
+    return this;
+  }
+  updateShape() {
+    const { sprite, heightStand, heightCrawl,
+      bodyOffsetX, bodyOffsetY, isDucking } = this;
+    sprite.body.width = this.widthDefault;
+    const correctHeight = isDucking ? heightCrawl : heightStand;
+    const deltaHeight = sprite.body.height - correctHeight;
+    sprite.body.height = correctHeight;
+    sprite.body.setOffset(
+      bodyOffsetX,
+      bodyOffsetY + (isDucking ? (heightStand - heightCrawl) : 0)
+    );
+    return this;
+  }
+  updateAnimation() {
+    const { sprite, vx, vy, onFloor,
+      isSliding, isDucking, isCrouching, facing } = this;
+    const anim =
+      (onFloor) ?
+        (isDucking) ?
+          (vx === 0) ?
+            'duck' :
+          (isSliding) ?
+            'slide' :
+          'crawl' :
+        (isCrouching) ?
+          'crouch' :
+        (Math.abs(vx) > 1) ?
+          'walk' :
+        'stand' :
+      (vy < 0) ?
+        'jump' :
+      'fall';
+
+    if (sprite.anims.currentAnim.key !== anim) {
+      sprite.play(anim);
     }
 
-    this.sprite.body.width = this.widthDefault;
-    const correctHeight =
-      this.isCrawling ? this.heightCrawling : this.heightStanding;
-      this.sprite.body.height = correctHeight;
-    if (this.isCrawling) {
-      this.sprite.body.setOffset(
-        this.bodyOffsetX,
-        this.bodyOffsetY + this.heightStanding - this.heightCrawling
-      )
-    } else {
-      this.sprite.body.setOffset(this.bodyOffsetX, this.bodyOffsetY);
-    }
-    this.sprite.y += this.sprite.body.height - correctHeight;
-    
+    sprite.flipX = !facing;
+
     return this;
   }
   buildJump() {
@@ -221,7 +268,7 @@ module.exports = class Player {
     );
     return this;
   }
-  releaseJump() {    
+  releaseJump() {
     this.vy = -this.jumpPower;
     return this;
   }
@@ -230,14 +277,6 @@ module.exports = class Player {
     this.vx = (facing === 1) ?
       Math.min(leapMax, vx + leapAccel) :
       Math.max(-leapMax, vx - leapAccel);
-    return this;
-  }
-  slide() {
-    this.vx *= this.slideFactor;
-    if (Math.abs(this.vx) < this.slideBreak) {
-      this.isSliding = false;
-      this.vx = 0;
-    }
     return this;
   }
   walkLeft() {
@@ -260,44 +299,14 @@ module.exports = class Player {
   }
   crawlLeft() {
     this.vx = -this.crawlSpeed;
+    return this;
   }
   crawlRight() {
     this.vx = this.crawlSpeed;
+    return this;
   }
   stopCrawling() {
     this.vx = 0;
-  }
-  fall() {
-    this.jumpPower = 0;
-    this.isCrawling = false;
-    this.isSliding = false;
-    return this;
-  }
-  updateAnimation() {
-    const anim =
-      (this.onFloor) ?
-        (this.jumpPower !== 0) ?
-          'crouch' :
-        (this.isSliding) ?
-          'slide' :
-        (this.isCrawling) ?
-          (this.vx === 0) ?
-            'duck' :
-          'crawl' :
-        (Math.abs(this.vx) > 1) ?
-          'walk' :
-        'stand' :
-      (this.vy < 0) ?
-        'jump' :
-      'fall';
-    
-    if (this.sprite.anims.currentAnim.key !== anim) {
-      console.log(anim);
-      this.sprite.play(anim);
-    }
-    
-    this.sprite.flipX = !this.facing;
-
     return this;
   }
 }

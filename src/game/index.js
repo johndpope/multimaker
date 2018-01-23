@@ -61,7 +61,8 @@ new Phaser.Game({
         key: 'slide',
         frames: this.anims.generateFrameNames('charles', {
           prefix: 'sCharlesCrawl_',
-          begin: 2
+          start: 2,
+          end: 2
         }),
       });
       this.anims.create({
