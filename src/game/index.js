@@ -7,8 +7,10 @@ new Phaser.Game({
   width: 400,
   height: 225,
   physics: {
+    // @todo: Switch to 'matter' so we can use sloped tiles
     default: 'arcade',
     arcade: {
+      // debug: true,
       gravity: {
         y: 450
       }
@@ -27,10 +29,78 @@ new Phaser.Game({
       this.load.image('tileset00', `${AS_TS}/tsNAZ.png`);
       
       const AS_M = `${AS}/maps`;
-      this.load.tilemapJSON('room000', `${AS_M}/room000.json`);
+      this.load.tilemapTiledJSON('room000', `${AS_M}/room000.json`);
     }
-
     create() {
+      this.cursors = this.input.keyboard.createCursorKeys();
+      this.anims.create({
+        key: 'stand',
+        frames:this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesStandGun_'
+        }),
+      });
+      this.anims.create({
+        key: 'walk',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesWalkGun_',
+          end: 8,
+        }),
+        frameRate: 10,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'crawl',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesCrawl_',
+          end: 4,
+        }),
+        frameRate: 6,
+        repeat: -1,
+      });
+      this.anims.create({
+        key: 'slide',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesCrawl_',
+          begin: 2
+        }),
+      });
+      this.anims.create({
+        key: 'duck',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesCrawl_',
+        }),
+      });
+      this.anims.create({
+        key: 'crouch',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesCrouch_'
+        }),
+      });
+      this.anims.create({
+        key: 'fall',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesFallGun_'
+        }),
+      });
+      this.anims.create({
+        key: 'fire',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesFireGun_'
+        }),
+      });
+      this.anims.create({
+        key: 'jump',
+        frames: this.anims.generateFrameNames('charles', {
+          prefix: 'sCharlesJumpGun_'
+        }),
+      });
+
+      this.inputs = {
+        left: false,
+        right: false,
+        crouch: false,
+      };
+      
       this.player = new Player(this, 100, 50);
       
       this.tm = this.add.tilemap('room000');
@@ -45,7 +115,24 @@ new Phaser.Game({
     }
 
     update() {
-      this.player.update();
+      this.player.update(this.getInputs());
+    }
+
+    getInputs() {
+      const { cursors: {
+        left: { isDown: left },
+        right: { isDown: right },
+        up: { isDown: up },
+        down: { isDown: down },
+        space: { isDown: jump }
+      } } = this;
+      return {
+        left: left && !right,
+        right: right && !left,
+        up: up && !down,
+        down: down && !up,
+        jump
+      };
     }
   }
 });
