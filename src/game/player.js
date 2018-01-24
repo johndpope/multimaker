@@ -1,4 +1,5 @@
 const Phaser = require('phaser/dist/phaser');
+const Actor = require('./actor');
 
 /**
  * @typedef {Object} InputMap
@@ -12,99 +13,110 @@ const Phaser = require('phaser/dist/phaser');
  * 
  * Should NOT contain code that pertains to other objects or game-global data.
  */
-module.exports = class Player {
+module.exports = class Player extends Actor {
   /**
-   * @param {Phaser.Scene} scene 
-   * @param {number} x
-   * @param {number} y
+   * @prop {number} bodyOffsetX Horizontal offset of the physical bounding box relative to the sprite
    */
-  constructor(scene, x, y) {
-    /**
-     * Scene that created this player
-     */
-    this.scene = scene;
-    
-    /**
-     * Horizontal offset of the physical bounding box relative to the sprite
-     */
-    this.bodyOffsetX = 4;
-    /**
-     * Vertical offset of the physical bounding box relative to the sprite
-     */
-    this.bodyOffsetY = 2;
-    /**
-     * Height of player when standing
-     */
-    this.heightStand = 14;
-    /**
-     * Height of player when crawling
-     */
-    this.heightCrawl = 6;
-    /**
-     * Width of player at all times
-     */
-    this.widthDefault = 8;
-    /**
-     * Maximum walking velocity on the ground
-     */
-    this.walkSpeedMax = 90;
-    /**
-     * Rate of accelleration when walking
-     */
-    this.walkAccel = 10;
-    /**
-     * Rate at which jump power builds while crouching
-     */
-    this.jumpPowerInc = 10;
-    /**
-     * Maxumim allowed jump power
-     */
-    this.jumpPowerMax = 180;
-    /**
-     * Amount by which horizontal speed increases when leaping
-     */
-    this.leapAccel = 40;
-    /**
-     * Maximum horizontal speed achieveable from leaping
-     */
-    this.leapMax = 120;
-    /**
-     * Factor by which horizontal speed is scaled while crouching or sliding
-     */
-    this.slideFactor = 0.97;
-    /**
-     * Speed under which sliding stops
-     */
-    this.slideBreak = 10;
-    /**
-     * Speed at which the player crawls
-     */
-    this.crawlSpeed = 30;
-    
-    /**
-     * Facing direction (0 = left, 1 = right)
-     */
-    this.facing = 1; 
+  
+  /**
+   * @prop {number} bodyOffsetY Vertical offset of the physical bounding box relative to the sprite
+   */
+  
+  /**
+   * @prop {number} heightStand of player when standing
+   */
+  
+  /**
+   * @prop {number} heightCrawl of player when crawling
+   */
+  
+  /**
+   * @prop {number} widthDefault player at all times
+   */
+  
+  /**
+   * @prop {number} walkSpeedMax Maximum walking velocity on the ground
+   */
+  
+  /**
+   * @prop {number} walkAccel Rate of accelleration when walking
+   */
+  
+   /**
+    * @prop {number} jumpPowerInc at which jump power builds while crouching
+    */
+  
+   /**
+    * @prop {number} jumpPowerMax Maxumim allowed jump power
+    */
+  
+   /**
+    * @prop {number} leapAccel Amount by which horizontal speed increases when leaping
+    */
+  
+   /**
+    * @prop {number} leapMax Maximum horizontal speed achieveable from leaping
+    */
+  
+   /**
+    * @prop {number} slideFactor Factor by which horizontal speed is scaled while crouching or sliding
+    */
+  
+   /**
+    * @prop {number} slideBreak Speed under which sliding stops
+    */
+  
+   /**
+    * @prop {number} crawlSpeed at which the player crawls
+    */
 
-    /**
-     * Current amount of power built up for jump
-     */
-    this.jumpPower = 0;
+  /**
+   * @prop {number} facing Facing direction (0 = left, 1 = right)
+   */
 
-    /**
-     * Whether the player is currently crawling
-     */
-    this.isDucking = false;
+  /**
+   * @prop {number} jumpPower Current amount of power built up for jump
+   */
 
-    /**
-     * Whether the player is currently sliding
-     */
-    this.isSliding = false;
-    
-    /**
-     * Sprite responsible for displaying the player and containing physics body
-     */
-    this.sprite = scene.physics.add.sprite(x, y, 'charles');
+  /**
+   * @prop {number} isDucking Whether the player is currently crawling
+   */
+
+  /**
+   * @prop {number} isSliding Whether the player is currently sliding
+   */
+
+  get defaults() {
+    return {
+      bodyOffsetX: 4,
+      bodyOffsetY: 2,
+      crawlSpeed: 30,
+      facing: 1,
+      heightCrawl: 6,
+      heightStand: 14,
+      isDucking: false,
+      isSliding: false,
+      jumpPower: 0,
+      jumpPowerInc: 10,
+      jumpPowerMax: 180,
+      leapAccel: 40,
+      leapMax: 120,
+      slideBreak: 10,
+      slideFactor: 0.97,
+      walkAccel: 10,
+      walkSpeedMax: 90,
+      widthDefault: 8,
+    };
+  }
+
+  /**
+   * @param {Phaser.Scene} scene
+   * @param {number} x 
+   * @param {number} y 
+   * @return {Phaser.GameObject}
+   */
+  setupGameObject(scene, x, y) {
+    const gameObject = scene.physics.add.sprite(x, y, 'charles');
     [
       'stand',
       'walk',
@@ -115,24 +127,11 @@ module.exports = class Player {
       'fall',
       'fire',
       'jump',
-    ].forEach(anim => this.sprite.anims.load(anim));
-    this.sprite.body.setBounce(0);
+    ].forEach(anim => gameObject.anims.load(anim));
+    gameObject.body.setBounce(0);
+    return gameObject;
   }
-  get onFloor() {
-    return this.sprite.body.onFloor();
-  }
-  get vx() {
-    return this.sprite.body.velocity.x;
-  }
-  set vx(vx) {
-    this.sprite.setVelocityX(vx);
-  }
-  get vy() {
-    return this.sprite.body.velocity.y;
-  }
-  set vy(vy) {
-    this.sprite.setVelocityY(vy);
-  }
+
   get isCrouching() {
     return !!this.jumpPower;
   }
@@ -221,20 +220,20 @@ module.exports = class Player {
     return this;
   }
   updateShape() {
-    const { sprite, heightStand, heightCrawl,
+    const { gameObject: gobj, heightStand, heightCrawl,
       bodyOffsetX, bodyOffsetY, isDucking } = this;
-    sprite.body.width = this.widthDefault;
+    gobj.body.width = this.widthDefault;
     const correctHeight = isDucking ? heightCrawl : heightStand;
-    const deltaHeight = sprite.body.height - correctHeight;
-    sprite.body.height = correctHeight;
-    sprite.body.setOffset(
+    const deltaHeight = gobj.body.height - correctHeight;
+    gobj.body.height = correctHeight;
+    gobj.body.setOffset(
       bodyOffsetX,
       bodyOffsetY + (isDucking ? (heightStand - heightCrawl) : 0)
     );
     return this;
   }
   updateAnimation() {
-    const { sprite, vx, vy, onFloor,
+    const { gameObject: gobj, vx, vy, onFloor,
       isSliding, isDucking, isCrouching, facing } = this;
     const anim =
       (onFloor) ?
@@ -253,11 +252,11 @@ module.exports = class Player {
         'jump' :
       'fall';
 
-    if (sprite.anims.currentAnim.key !== anim) {
-      sprite.play(anim);
+    if (gobj.anims.currentAnim.key !== anim) {
+      gobj.play(anim);
     }
 
-    sprite.flipX = !facing;
+    gobj.flipX = !facing;
 
     return this;
   }

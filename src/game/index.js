@@ -6,6 +6,7 @@ new Phaser.Game({
   type: Phaser.WEBGL,
   width: 400,
   height: 225,
+  pixelArt: true,
   physics: {
     // @todo: Switch to 'matter' so we can use sloped tiles
     default: 'arcade',
@@ -37,17 +38,27 @@ new Phaser.Game({
     create() {
       this.cursors = this.input.keyboard.createCursorKeys();
       
+      this.groups = {
+        player: this.add.group(),
+        bullet: this.add.group()
+      };
+
       this.player = new Player(this, 100, 50);
+      this.groups.player.add(this.player.gameObject);
       
       this.tm = this.add.tilemap('room000');
       this.ts = this.tm.addTilesetImage('tileset00');
       this.layer = this.tm.createStaticLayer(0, this.ts, 0, 0);
       this.layer.setCollisionBetween(64,128);
       
-      this.physics.add.collider(this.player.sprite, this.layer);
-      
+      this.physics.add.collider(this.player.gameObject, this.layer);
+      this.setupCamera();
+    }
+    
+    setupCamera() {
+      this.cameras.main.setRoundPixels(true);
       this.cameras.main.setBounds(0, 0, this.tm.widthInPixels, this.tm.heightInPixels);
-      this.cameras.main.startFollow(this.player.sprite);
+      this.cameras.main.startFollow(this.player.gameObject);
     }
 
     update() {
