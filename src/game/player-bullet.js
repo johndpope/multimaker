@@ -2,7 +2,7 @@ const Phaser = require('phaser/dist/phaser');
 const Actor = require('./actor');
 
 module.exports = class PlayerBullet extends Actor {
-  setupDefaultValues() {
+  get defaults() {
 
   }
   /**
@@ -11,7 +11,7 @@ module.exports = class PlayerBullet extends Actor {
    * @param {number} y 
    * @return {Phaser.GameObject}
    */
-  setupGameObject(scene, x, y) {
-
+  setupGameObjects(scene, x, y) {
+    const gameObject = 
   }
 }

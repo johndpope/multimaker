@@ -11,10 +11,15 @@ module.exports = class Actor {
    * @param {number} y
    */
   constructor(scene, x, y) {
-    this.scene = scene;
     Object.assign(this, this.defaults);
-    this.gameObject = this.setupGameObject(scene, x, y);
-    this.setupComplete();
+    this.gameObjects = this.setupGameObjects(scene, x, y);
+  }
+
+  /**
+   * Shortcut to the first (primary) game object controlled by this actor.
+   */
+  get gameObject() {
+    return this.gameObjects[0];
   }
 
   /**
@@ -32,30 +37,35 @@ module.exports = class Actor {
    * @param {Phaser.Scene} scene
    * @param {number} x 
    * @param {number} y 
-   * @return {Phaser.GameObject}
+   * @return {Phaser.GameObject[]}
    */
-  setupGameObject(scene, x, y) {
-    throw new Error('setupGameObject(): Not implemented');
+  setupGameObjects(scene, x, y) {
+    throw new Error('setupGameObjects(): Not implemented');
   }
 
-  setupComplete() { }
-
+  /**
+   * Shortcut to determine whether the object is resting on a solid object below
+   */
   get onFloor() {
     return this.gameObject.body.onFloor();
   }
 
+  /**
+   * Shortcut to horizontal velocity
+   */
   get vx() {
     return this.gameObject.body.velocity.x;
   }
-
   set vx(vx) {
     this.gameObject.setVelocityX(vx);
   }
 
+  /**
+   * Shortcut to vertical velocity
+   */
   get vy() {
     return this.gameObject.body.velocity.y;
   }
-
   set vy(vy) {
     this.gameObject.setVelocityY(vy);
   }

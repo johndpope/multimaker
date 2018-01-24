@@ -97,7 +97,7 @@ module.exports = class Player extends Actor {
       isDucking: false,
       isSliding: false,
       jumpPower: 0,
-      jumpPowerInc: 10,
+      jumpPowerInc: 8,
       jumpPowerMax: 180,
       leapAccel: 40,
       leapMax: 120,
@@ -113,9 +113,9 @@ module.exports = class Player extends Actor {
    * @param {Phaser.Scene} scene
    * @param {number} x 
    * @param {number} y 
-   * @return {Phaser.GameObject}
+   * @return {Phaser.GameObject[]}
    */
-  setupGameObject(scene, x, y) {
+  setupGameObjects(scene, x, y) {
     const gameObject = scene.physics.add.sprite(x, y, 'charles');
     [
       'stand',
@@ -129,7 +129,7 @@ module.exports = class Player extends Actor {
       'jump',
     ].forEach(anim => gameObject.anims.load(anim));
     gameObject.body.setBounce(0);
-    return gameObject;
+    return [gameObject];
   }
 
   get isCrouching() {
