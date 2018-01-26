@@ -1,9 +1,12 @@
 import path from 'path';
-import Phaser from 'phaser';
+const Phaser = require('phaser');
 import FSXHR from '../fs-xml-http-request';
 import Player from './player';
 
-FSXHR.install();
+// Modify the loader so it will load local files instead of remote files
+// FIXME: This is a dirty hack that will probably break
+FSXHR.install(Phaser.Loader.LoaderPlugin.prototype, 'processLoadQueue');
+
 const game = new Phaser.Game({
   type: Phaser.WEBGL,
   width: 400,
@@ -22,6 +25,7 @@ const game = new Phaser.Game({
   
   scene: new class extends Phaser.Scene {
     preload() {
+      // DEBUG: Expose scene globally
       window.scene = this;
       
       const AS = path.join(__static, 'projects', 'antispace');
@@ -41,6 +45,14 @@ const game = new Phaser.Game({
       
       const AS_M = path.join(AS, 'maps');
       this.load.tilemapTiledJSON('room000', path.join(AS_M, 'room000.json'));
+
+      const AS_SN = path.join(AS, 'sounds');
+      this.load.audio('chink', path.join(AS_SN, 'chink.wav'));
+      this.load.audio('crunch', path.join(AS_SN, 'crunch.wav'));
+      this.load.audio('footstep', path.join(AS_SN, 'footstep.wav'));
+      this.load.audio('jump', path.join(AS_SN, 'jump.wav'));
+      this.load.audio('land', path.join(AS_SN, 'land.wav'));
+      this.load.audio('pew', path.join(AS_SN, 'pew.wav'));
     }
     create() {
       this.cursors = this.input.keyboard.createCursorKeys();

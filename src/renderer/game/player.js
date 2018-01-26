@@ -86,6 +86,10 @@ export default class Player extends Actor {
    * @prop {number} isSliding Whether the player is currently sliding
    */
 
+  /**
+   * @orop {boolean} prevOnFloor Whether player was on the floor in the previous frame
+   */
+
   get defaults() {
     return {
       bodyOffsetX: 4,
@@ -106,6 +110,7 @@ export default class Player extends Actor {
       walkAccel: 10,
       walkSpeedMax: 90,
       widthDefault: 8,
+      prevOnFloor: false
     };
   }
 
@@ -116,7 +121,8 @@ export default class Player extends Actor {
    * @return {Phaser.GameObject[]}
    */
   setupGameObjects(scene, x, y) {
-    const gameObject = scene.physics.add.sprite(x, y, 'charles');
+    const main = scene.physics.add.sprite(x, y, 'charles');
+    main.body.setBounce(0);
     [
       'stand',
       'walk',
@@ -127,9 +133,18 @@ export default class Player extends Actor {
       'fall',
       'fire',
       'jump',
-    ].forEach(anim => gameObject.anims.load(anim));
-    gameObject.body.setBounce(0);
-    return [gameObject];
+    ].forEach(anim => main.anims.load(anim));
+
+    // Register event handlers to play the footstep sounds
+    const walk = main.anims.animationManager.get('walk');
+    walk.onUpdate = () => {
+      const sound = main.anims.currentFrame.frame.customData.sound;
+      if (sound) {
+        scene.sound.play(sound);
+      }
+    }
+    
+    return [main];
   }
 
   get isCrouching() {
@@ -212,8 +227,13 @@ export default class Player extends Actor {
   }
   updateFall() {
     if (this.onFloor) {
+      if (!this.prevOnFloor) {
+        this.scene.sound.play('land');
+      }
+      this.prevOnFloor = true;
       return this;
     }
+    this.prevOnFloor = false;
     this.jumpPower = 0;
     this.isDucking = false;
     this.isSliding = false;
@@ -269,6 +289,7 @@ export default class Player extends Actor {
   }
   releaseJump() {
     this.vy = -this.jumpPower;
+    this.scene.sound.play('jump');
     return this;
   }
   leap() {

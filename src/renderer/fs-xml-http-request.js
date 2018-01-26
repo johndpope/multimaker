@@ -1,13 +1,11 @@
 import fs from 'fs';
 
-export const RealXMLHttpRequest = window.XMLHttpRequest;
+let WindowXMLHttpRequest = null;
 
 /**
- * Wraps the Node fs module with an XHR-compatible interface
- * 
- * Suitable for replacing the global XmlHttpRequest class.
+ * An XMLHttpRequest-compatible interface to Node's "fs" module.
  */
-class FsXMLHttpRequest {
+class FSXHR {
   constructor() {
     /**
      * Whether `async` was set when open() was called
@@ -76,13 +74,13 @@ class FsXMLHttpRequest {
      * One of the readyState constants defined on XMLHttpRequest
      * @type {number}
      */
-    this.readyState = FsXMLHttpRequest.UNSENT;
+    this.readyState = FSXHR.UNSENT;
     /**
      * Contains the loaded data.
      * 
      * The type of object stored here depends on the value of responseText.
      * 
-     * @type {string|Blob}
+     * @type {string|ArrayBuffer|Blob}
      */
     this.response = null;
     /**
@@ -97,6 +95,7 @@ class FsXMLHttpRequest {
      * 
      * - 'text'
      * - 'blob'
+     * - 'arraybuffer'
      * 
      * @type {string}
      */
@@ -191,7 +190,7 @@ class FsXMLHttpRequest {
    */
   send(body) {
     setImmediate(() => {
-      this.readyState = FsXMLHttpRequest.LOADING;
+      this.readyState = FSXHR.LOADING;
       const event = {
         lengthComputable: false,
         total: 0,
@@ -204,7 +203,7 @@ class FsXMLHttpRequest {
       this.onreadystatechange();
     });
     fs.readFile(this._url, (err, data) => {
-      this.readyState = FsXMLHttpRequest.DONE;
+      this.readyState = FSXHR.DONE;
       if (err) {
         this.status = 500;
         this.statusText = "Internal Server Error";
@@ -219,6 +218,9 @@ class FsXMLHttpRequest {
         this.status = 200;
         this.statusText = "OK";
         switch (this.responseType) {
+          case 'arraybuffer':
+            this.response = data.buffer;
+            break;
           case 'blob':
             this.response = new Blob([data.buffer]);
             break;
@@ -247,24 +249,46 @@ class FsXMLHttpRequest {
     this._requestHeaders[header] = value;
   }
   /**
+   * Replaces a method of an object with a version that uses FSXHR.
+   * 
+   * @param {Object} obj Object to be modified
+   * @param {string} fnName Name of method to be replaced
+   */
+  static install(obj, fnName) {
+    const oldFn = obj[fnName];
+    obj[fnName] = function (...args) {
+      const oldXHR = window.XMLHttpRequest;
+      window.XMLHttpRequest = FSXHR;
+      const val = oldFn.apply(this, args);
+      window.XMLHttpRequest = oldXHR;
+      return val;
+    };
+  }
+  /**
    * Replaces the window's XMLHttpRequest with this class.
    */
-  static install() {
-    window.XMLHttpRequest = FsXMLHttpRequest;
+  static installGlobal() {
+    if (window.XMLHttpRequest !== FSXHR) {
+      WindowXMLHttpRequest = window.XMLHttpRequest;
+      window.XMLHttpRequest = FSXHR;
+    }
   }
   /**
    * Replaces the window's XMLHttpRequest with its original value.
    */
-  static uninstall() {
-    window.XMLHttpRequest = RealXMLHttpRequest;
+  static uninstallGlobal() {
+    if (window.XMLHttpRequest === FSXHR) {
+      window.XMLHttpRequest = WindowXMLHttpRequest;
+      WindowXMLHttpRequest = null;
+    }
   }
 }
-FsXMLHttpRequest.DONE = RealXMLHttpRequest.DONE;
-FsXMLHttpRequest.HEADERS_RECEIVED = RealXMLHttpRequest.HEADERS_RECEIVED;
-FsXMLHttpRequest.LOADING = RealXMLHttpRequest.LOADING;
-FsXMLHttpRequest.OPENED = RealXMLHttpRequest.OPENED;
-FsXMLHttpRequest.UNSENT = RealXMLHttpRequest.UNSENT;
+FSXHR.DONE = XMLHttpRequest.DONE;
+FSXHR.HEADERS_RECEIVED = XMLHttpRequest.HEADERS_RECEIVED;
+FSXHR.LOADING = XMLHttpRequest.LOADING;
+FSXHR.OPENED = XMLHttpRequest.OPENED;
+FSXHR.UNSENT = XMLHttpRequest.UNSENT;
 
 function noop() { }
 
-export default FsXMLHttpRequest;
+export default FSXHR;

@@ -11,6 +11,7 @@ export default class Actor {
    * @param {number} y
    */
   constructor(scene, x, y) {
+    this.scene = scene;
     Object.assign(this, this.defaults);
     this.gameObjects = this.setupGameObjects(scene, x, y);
   }
