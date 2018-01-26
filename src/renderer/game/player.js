@@ -114,37 +114,31 @@ export default class Player extends Actor {
     };
   }
 
+  get animationNames() {
+    return {
+      main: [
+        'stand',
+        'walk',
+        'crawl',
+        'slide',
+        'duck',
+        'crouch',
+        'fall',
+        'fire',
+        'jump',
+      ]
+    };
+  }
+
   /**
-   * @param {Phaser.Scene} scene
    * @param {number} x 
    * @param {number} y 
    * @return {Phaser.GameObject[]}
    */
-  setupGameObjects(scene, x, y) {
-    const main = scene.physics.add.sprite(x, y, 'charles');
+  setupGameObjects(x, y) {
+    const main = this.scene.physics.add.sprite(x, y, 'charles');
     main.body.setBounce(0);
-    [
-      'stand',
-      'walk',
-      'crawl',
-      'slide',
-      'duck',
-      'crouch',
-      'fall',
-      'fire',
-      'jump',
-    ].forEach(anim => main.anims.load(anim));
-
-    // Register event handlers to play the footstep sounds
-    const walk = main.anims.animationManager.get('walk');
-    walk.onUpdate = () => {
-      const sound = main.anims.currentFrame.frame.customData.sound;
-      if (sound) {
-        scene.sound.play(sound);
-      }
-    }
-    
-    return [main];
+    return { main };
   }
 
   get isCrouching() {

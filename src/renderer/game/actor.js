@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Phaser from 'phaser';
 
 export default class Actor {
@@ -13,14 +14,15 @@ export default class Actor {
   constructor(scene, x, y) {
     this.scene = scene;
     Object.assign(this, this.defaults);
-    this.gameObjects = this.setupGameObjects(scene, x, y);
+    this.gameObjects = this.setupGameObjects(x, y);
+    this.setupAnimations();
   }
 
   /**
    * Shortcut to the first (primary) game object controlled by this actor.
    */
   get gameObject() {
-    return this.gameObjects[0];
+    return this.gameObjects.main;
   }
 
   /**
@@ -35,13 +37,33 @@ export default class Actor {
   }
 
   /**
-   * @param {Phaser.Scene} scene
+   * Map of arrays of animations for each game object
+   * @return {{[key: string]: string[]}}
+   */
+  get animationNames() {
+    return {};
+  }
+
+  /**
    * @param {number} x 
    * @param {number} y 
-   * @return {Phaser.GameObject[]}
+   * @return {{ [key: string]: Phaser.GameObject }}
    */
-  setupGameObjects(scene, x, y) {
+  setupGameObjects(x, y) {
     throw new Error('setupGameObjects(): Not implemented');
+  }
+
+  setupAnimations() {
+    const { animationNames } = this;
+    _.each(this.gameObjects, ({ anims }, spriteKey) => {
+      const spriteAnimationNames = animationNames[spriteKey];
+      if (!(spriteAnimationNames && anims)) {
+        return;
+      }
+      spriteAnimationNames.forEach(spriteAnimationName => {
+        anims.load(spriteAnimationName);
+      })
+    });
   }
 
   /**

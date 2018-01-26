@@ -1,4 +1,5 @@
 import path from 'path';
+import _ from 'lodash';
 const Phaser = require('phaser');
 import FSXHR from '../fs-xml-http-request';
 import Player from './player';
@@ -23,11 +24,13 @@ const game = new Phaser.Game({
     }
   },
   
+  
   scene: new class extends Phaser.Scene {
-    preload() {
+    init() {
       // DEBUG: Expose scene globally
       window.scene = this;
-      
+    }
+    preload() {
       const AS = path.join(__static, 'projects', 'antispace');
 
       const AS_SP = path.join(AS, 'sprites');
@@ -55,29 +58,65 @@ const game = new Phaser.Game({
       this.load.audio('pew', path.join(AS_SN, 'pew.wav'));
     }
     create() {
-      this.cursors = this.input.keyboard.createCursorKeys();
-      
+      this
+        .setupFrameSounds()
+        .setupGroups()
+        .setupMaps()
+        .setupPlayer()
+        .setupCollisions()
+        .setupCamera()
+        .setupInputs();
+    }
+    
+    setupFrameSounds() {
+      _.each(this.anims.anims.entries, (anim, key) => {
+        anim.onUpdate = sprite => {
+          const { sound } = sprite.anims.currentFrame.frame.customData;
+          if (sound) {
+            this.sound.play(sound);
+          }
+        }
+      })
+      return this;
+    }
+    
+    setupGroups() {
       this.groups = {
         player: this.add.group(),
         bullet: this.add.group()
       };
+      return this;
+    }
 
-      this.player = new Player(this, 100, 50);
-      this.groups.player.add(this.player.gameObject);
-      
+    setupMaps() {
       this.tm = this.add.tilemap('room000');
       this.ts = this.tm.addTilesetImage('tileset00');
       this.layer = this.tm.createStaticLayer(0, this.ts, 0, 0);
-      this.layer.setCollisionBetween(64,128);
-      
-      this.physics.add.collider(this.player.gameObject, this.layer);
-      this.setupCamera();
+      this.layer.setCollisionBetween(64, 128);
+      return this;
     }
     
+    setupPlayer() {
+      this.player = new Player(this, 100, 50);
+      this.groups.player.add(this.player.gameObject);
+      return this;
+    }
+    
+    setupCollisions() {
+      this.physics.add.collider(this.player.gameObject, this.layer);
+      return this;
+    }
+
     setupCamera() {
       this.cameras.main.setRoundPixels(true);
       this.cameras.main.setBounds(0, 0, this.tm.widthInPixels, this.tm.heightInPixels);
       this.cameras.main.startFollow(this.player.gameObject);
+      return this;
+    }
+
+    setupInputs() {
+      this.cursors = this.input.keyboard.createCursorKeys();
+      return this;
     }
 
     update() {
