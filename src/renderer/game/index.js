@@ -1,8 +1,10 @@
-const Phaser = require('phaser/dist/phaser');
-const Player = require('./player');
+import path from 'path';
+import Phaser from 'phaser';
+import FSXHR from '../fs-xml-http-request';
+import Player from './player';
 
-new Phaser.Game({
-  
+FSXHR.install();
+const game = new Phaser.Game({
   type: Phaser.WEBGL,
   width: 400,
   height: 225,
@@ -21,19 +23,24 @@ new Phaser.Game({
   scene: new class extends Phaser.Scene {
     preload() {
       window.scene = this;
-      const AS = '../projects/antispace';
       
-      const AS_SP = `${AS}/sprites`;
-      this.load.atlas('charles', `${AS_SP}/charles.png`, `${AS_SP}/charles.json`);
+      const AS = path.join(__static, 'projects', 'antispace');
+
+      const AS_SP = path.join(AS, 'sprites');
+      this.load.atlas(
+        'charles',
+        path.join(AS_SP, 'charles.png'),
+        path.join(AS_SP, 'charles.json')
+      );
       
-      const AS_AN = `${AS}/animations`;
-      this.load.animation('charlesAnim', `${AS_AN}/charles.json`);
+      const AS_AN = path.join(AS, 'animations');
+      this.load.animation('charlesAnim', path.join(AS_AN, 'charles.json'));
       
-      const AS_TS = `${AS}/tiles`;
-      this.load.image('tileset00', `${AS_TS}/tsNAZ.png`);
+      const AS_TS = path.join(AS, 'tiles');
+      this.load.image('tileset00', path.join(AS_TS, 'tsNAZ.png'));
       
-      const AS_M = `${AS}/maps`;
-      this.load.tilemapTiledJSON('room000', `${AS_M}/room000.json`);
+      const AS_M = path.join(AS, 'maps');
+      this.load.tilemapTiledJSON('room000', path.join(AS_M, 'room000.json'));
     }
     create() {
       this.cursors = this.input.keyboard.createCursorKeys();
@@ -83,4 +90,3 @@ new Phaser.Game({
     }
   }
 });
-

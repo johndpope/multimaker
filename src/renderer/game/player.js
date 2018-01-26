@@ -1,5 +1,5 @@
-const Phaser = require('phaser/dist/phaser');
-const Actor = require('./actor');
+import Phaser from 'phaser';
+import Actor from './actor';
 
 /**
  * @typedef {Object} InputMap
@@ -13,7 +13,7 @@ const Actor = require('./actor');
  * 
  * Should NOT contain code that pertains to other objects or game-global data.
  */
-module.exports = class Player extends Actor {
+export default class Player extends Actor {
   /**
    * @prop {number} bodyOffsetX Horizontal offset of the physical bounding box relative to the sprite
    */

@@ -1,6 +1,6 @@
-const Phaser = require('phaser/dist/phaser');
+import Phaser from 'phaser';
 
-module.exports = class Actor {
+export default class Actor {
   /**
    * @prop {Phaser.GameObject} gameObject Game object responsible for displaying the player and containing physics body
    */

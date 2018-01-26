@@ -2,9 +2,13 @@
   "name": "multimaker",
   "version": "0.1.0",
   "description": "Generic maker-type game",
-  "main": "src/main.js",
+  "main": "src/main",
   "scripts": {
-    "start": "electron ."
+    "dev": "electron-webpack dev",
+    "start": "electron .",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },
   "author": "Brad K. Harms",
   "license": "ISC",
@@ -12,12 +16,27 @@
     "@types/es6-promisify": "^5.0.0",
     "@types/lodash": "^4.14.93",
     "@types/node": "^9.3.0",
-    "electron": "^1.8.1",
-    "typescript": "^2.6.2"
+    "css-loader": "^0.28.9",
+    "electron-builder": "^19.55.2",
+    "electron-webpack": "^1.11.0",
+    "source-map": "^0.7.0",
+    "source-map-support": "^0.5.2",
+    "style-loader": "^0.19.1",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
   },
   "dependencies": {
+    "electron": "^1.8.1",
     "es6-promisify": "^5.0.0",
     "lodash": "^4.17.4",
     "phaser": "^3.0.0-beta.19"
+  },
+  "electronWebpack": {
+    "main": {
+      "webpackConfig": "webpack.main.additions.js"
+    },
+    "renderer": {
+      "webpackConfig": "webpack.renderer.additions.js"
+    }
   }
 }

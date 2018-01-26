@@ -1,7 +1,7 @@
-const Phaser = require('phaser/dist/phaser');
-const Actor = require('./actor');
+import Phaser from 'phaser';
+import Actor from './actor';
 
-module.exports = class PlayerBullet extends Actor {
+export default class PlayerBullet extends Actor {
   get defaults() {
 
   }
@@ -12,6 +12,6 @@ module.exports = class PlayerBullet extends Actor {
    * @return {Phaser.GameObject}
    */
   setupGameObjects(scene, x, y) {
-    const gameObject = 
+    // const gameObject = 
   }
 }

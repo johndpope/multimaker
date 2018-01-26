@@ -6,58 +6,68 @@ Asana: https://app.asana.com/0/523303564324416/list
 
 ## How do I get set up?
 
-This is an Electron app and as such it does not need to use any bundler or file watching.
+This app is based on Electron, but it uses Webpack for development.
 
 To run:
 
 - Install latest node 8.x and npm
+- Install Yarn
 - `git clone` the repo
 - `cd` into repo
-- run `npm i`
-- run `npm start`
+- run `yarn`
+- run `yarn dev`
 
 ## Repository Structure
 
-### `./projects/`
+### `./static/`
+Files not bundled into the Webpack bundle but loaded as-is
+
+#### `./static/projects/`
 Contains base projects from which new projects can be made.
 
-#### `./projects/{project}/`
-Each folder in `./projects/` is a base project.
+##### `./static/projects/{project}/`
+Each folder in `./static/projects/` is a base project.
 
-##### `./projects/{project}/backgrounds/`
+###### `./static/projects/{project}/backgrounds/`
 Images that serve as background in the current project.
 
-##### `./projects/{project}/maps/`
+###### `./static/projects/{project}/maps/`
 Tiled-compatible .json maps. Currently the tilesets must be embedded because Phaser does not support external tilesets.
 
-##### `./projects/{project}/sprites/`
+##### `./static/projects/{project}/sprites/`
 Images that are used as sprite sheets and the .json texture atlases that go with them. The .json atlases must match the name of the sprite image file.
 
-##### `./projects/{project}/tiles/`
+###### `./static/projects/{project}/tiles/`
 Images used as tile sets.
 
-#### `./projects/antispace/`
+##### `./projects/antispace/`
 The Antispace base project.
 
-### `./src/`
+#### `./src/`
 All JavaScript, HTML, and CSS source code that runs when the application is executed.
 
-#### `./src/game/`
+##### `./src/main`
+Code that is executed in the main Electron thread.
+
+###### `./src/main/index.html`
+Describes the content of the main window in production builds.
+
+###### `./src/main/index.js`
+The Electron main entry point. Responsible for creating the main window and a few other low-level things.
+
+##### `./src/renderer/`
+Code that is executed in Electron's rendering thread.
+
+###### `./src/renderer/game/`
 Code that governs what happens in the game part of the application apart from the editor functionality.
 
-#### `./src/game/index.js`
-This might be described as the entry point for the game, which is loaded by `renderer.js` at the same time as the editor overlay.
+###### `./src/renderer/game/index.js`
+This might be described as the entry point for the game, which is loaded by rendering thread at the same time as the editor overlay.
 
-#### `./src/main.js`
-The program main entry point. Responsible for creating the main window and a few other low-level things.
+##### `./src/renderer/index.js`
+The entry point for the Electron rendering thread.
 
-#### `./src/renderer.js`
-The "client-side" entry point that Electron runs within the main window.
-
-#### `./src/index.html`
-Describes the content of the main window and is where `renderer.js` is executed.
-
-#### `./src/style.css`
+##### `./src/renderer/style.css`
 Main stylesheet for index.html. At some point this file should probably be split up into smaller components.
 
 ## Development Guidelines
