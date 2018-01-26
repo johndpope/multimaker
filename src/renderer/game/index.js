@@ -1,8 +1,18 @@
 import path from 'path';
+import fs from 'fs';
 import _ from 'lodash';
-const Phaser = require('phaser');
+import Phaser from 'phaser';
+import createFileLoader from '../flod/file-loader';
 import FSXHR from '../fs-xml-http-request';
 import Player from './player';
+
+const xmFileName =
+  path.join(__static, 'projects', 'antispace', 'music', 'naz.xm');
+fs.readFile(xmFileName, (err, data) => {
+  const flodFileLoader = createFileLoader();
+  const player = flodFileLoader.load(data.buffer);
+  player.play();
+});
 
 // Modify the loader so it will load local files instead of remote files
 // FIXME: This is a dirty hack that will probably break
