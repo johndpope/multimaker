@@ -2,19 +2,11 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 import Phaser from 'phaser';
-import createFileLoader from '../flod/file-loader';
+import flod from '../flod';
 import FSXHR from '../fs-xml-http-request';
 import Player from './player';
 
-const xmFileName =
-  path.join(__static, 'projects', 'antispace', 'music', 'naz.xm');
-fs.readFile(xmFileName, (err, data) => {
-  const flodFileLoader = createFileLoader();
-  const player = flodFileLoader.load(data.buffer);
-  player.play();
-});
-
-// Modify the loader so it will load local files instead of remote files
+// Modify the Phaser loader so it will load local files instead of remote files
 // FIXME: This is a dirty hack that will probably break
 FSXHR.install(Phaser.Loader.LoaderPlugin.prototype, 'processLoadQueue');
 
@@ -56,10 +48,10 @@ const game = new Phaser.Game({
       const AS_TS = path.join(AS, 'tiles');
       this.load.image('tileset00', path.join(AS_TS, 'tsNAZ.png'));
       
-      const AS_M = path.join(AS, 'maps');
-      this.load.tilemapTiledJSON('room000', path.join(AS_M, 'room000.json'));
+      const AS_TM = path.join(AS, 'maps');
+      this.load.tilemapTiledJSON('room000', path.join(AS_TM, 'room000.json'));
 
-      const AS_SN = path.join(AS, 'sounds');
+      const AS_SO = path.join(AS, 'sounds');
       [
         'chink',
         'crunch',
@@ -69,8 +61,11 @@ const game = new Phaser.Game({
         'pew',
       ].forEach(snd => {
         // TODO: Upgrade to .ogg
-        this.load.audio(snd, path.join(AS_SN, `${snd}.wav`));
+        this.load.audio(snd, path.join(AS_SO, `${snd}.wav`));
       });
+
+      const AS_MU = path.join(AS, 'music');
+      this.load.binary('nazXm', path.join(AS_MU, 'naz.xm'));
     }
     create() {
       this
@@ -111,6 +106,8 @@ const game = new Phaser.Game({
     }
 
     setupTilemaps() {
+      flod.load(this.cache.binary.get('nazXm')).play();
+      
       // TODO: Allow loading various tilemaps
       // TODO: Allow the tilemap to determine ALL level content
       this.tilemap = this.add.tilemap('room000');
