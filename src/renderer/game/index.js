@@ -50,24 +50,36 @@ const game = new Phaser.Game({
       this.load.tilemapTiledJSON('room000', path.join(AS_M, 'room000.json'));
 
       const AS_SN = path.join(AS, 'sounds');
-      this.load.audio('chink', path.join(AS_SN, 'chink.wav'));
-      this.load.audio('crunch', path.join(AS_SN, 'crunch.wav'));
-      this.load.audio('footstep', path.join(AS_SN, 'footstep.wav'));
-      this.load.audio('jump', path.join(AS_SN, 'jump.wav'));
-      this.load.audio('land', path.join(AS_SN, 'land.wav'));
-      this.load.audio('pew', path.join(AS_SN, 'pew.wav'));
+      [
+        'chink',
+        'crunch',
+        'footstep',
+        'jump',
+        'land',
+        'pew',
+      ].forEach(snd => {
+        // TODO: Upgrade to .ogg
+        this.load.audio(snd, path.join(AS_SN, `${snd}.wav`));
+      });
     }
     create() {
       this
         .setupFrameSounds()
         .setupGroups()
-        .setupMaps()
+        .setupTilemaps()
         .setupPlayer()
         .setupCollisions()
         .setupCamera()
         .setupInputs();
     }
     
+    /**
+     * Allows animation frames to play sounds.
+     * 
+     * The sounds to be played are embedded in the sprite frame data under the
+     * key "sound" of each frame. The value is the name of the sound to play.
+     * Any animation using that frame will play the sound when it appears.
+     */
     setupFrameSounds() {
       _.each(this.anims.anims.entries, (anim, key) => {
         anim.onUpdate = sprite => {
@@ -88,11 +100,16 @@ const game = new Phaser.Game({
       return this;
     }
 
-    setupMaps() {
-      this.tm = this.add.tilemap('room000');
-      this.ts = this.tm.addTilesetImage('tileset00');
-      this.layer = this.tm.createStaticLayer(0, this.ts, 0, 0);
-      this.layer.setCollisionBetween(64, 128);
+    setupTilemaps() {
+      // TODO: Allow loading various tilemaps
+      // TODO: Allow the tilemap to determine ALL level content
+      this.tilemap = this.add.tilemap('room000');
+      // TODO: Load tilesets based on tilemap data
+      this.tileset = this.tilemap.addTilesetImage('tileset00');
+      // TODO: Allow multiple tilemap layers
+      this.tilemapLayer =
+        this.tilemap.createStaticLayer(0, this.tileset, 0, 0);
+      this.tilemapLayer.setCollisionBetween(64, 128);
       return this;
     }
     
@@ -103,13 +120,18 @@ const game = new Phaser.Game({
     }
     
     setupCollisions() {
-      this.physics.add.collider(this.player.gameObject, this.layer);
+      this.physics.add.collider(this.player.gameObject, this.tilemapLayer);
       return this;
     }
 
     setupCamera() {
       this.cameras.main.setRoundPixels(true);
-      this.cameras.main.setBounds(0, 0, this.tm.widthInPixels, this.tm.heightInPixels);
+      this.cameras.main.setBounds(
+        0,
+        0,
+        this.tilemap.widthInPixels,
+        this.tilemap.heightInPixels
+      );
       this.cameras.main.startFollow(this.player.gameObject);
       return this;
     }
