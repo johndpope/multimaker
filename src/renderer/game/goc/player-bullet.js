@@ -7,12 +7,11 @@ export default class PlayerBullet extends GameObjectController {
     this.scene.groups.bullet.add(this);
     this.scene.sound.play('pew');
     this.facing = facing;
-    this.vx = facing ? this.maxSpeed : -this.maxSpeed;
+    this.main.setVelocityX(facing ? this.maxSpeed : -this.maxSpeed);
   }
   get defaultConfig() {
     return {
       maxSpeed: 920,
-      tailLength: 7,
       ttl: 60,
       bodyW: 24,
       bodyH: 1,
@@ -27,22 +26,16 @@ export default class PlayerBullet extends GameObjectController {
    * @return {{[key: string]: Phaser.GameObject}}
    */
   get animationNames() {
-    const all = {};
-    for (let i = 0; i < this.tailLength; i++) {
-      all[`tail${i}`] = ['laserTail'];
-    }
-    all.main = ['laserHead'];
-    return all;
+    return { main: ['laserHead'] };
   }
   setupGameObjects(x, y) {
-    const all = {};
-    all.main = this.scene.physics.add.sprite(x, y, 'laser');
-    all.main.setDisplayOrigin(this.originX, this.originY);
-    all.main.body.width = this.bodyW;
-    all.main.body.height = this.bodyH;
-    all.main.body.allowGravity = false;
-    all.main.play('laserHead');
-    return all;
+    const main = this.scene.physics.add.sprite(x, y, 'laser');
+    main.setDisplayOrigin(this.originX, this.originY);
+    main.body.width = this.bodyW;
+    main.body.height = this.bodyH;
+    main.body.allowGravity = false;
+    main.play('laserHead');
+    return { main };
   }
   resetTailParticle() {
 

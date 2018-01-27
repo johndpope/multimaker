@@ -131,9 +131,9 @@ export default class Player extends GameObjectController {
       bodyW: 8,
       crawlSpeed: 30,
       facing: 1,
-      fireOffsetXLeft: -24,
+      fireOffsetXLeft: -16,
       fireOffsetXRight: 8,
-      fireOffsetY: 0,
+      fireOffsetY: 6,
       firePower: 30,
       firePowerCost: 30,
       firePowerMax: 30,
@@ -380,7 +380,7 @@ export default class Player extends GameObjectController {
     if (vx === 0) {
       return;
     }
-    main.setVelocity(
+    main.setVelocityX(
       (vx > 0) ? Math.max(vx - walkAccel, 0) : Math.min(vx + walkAccel, 0)
     );
     return this;
