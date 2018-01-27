@@ -13,7 +13,11 @@ export default class PlayerBullet extends Actor {
     return {
       maxSpeed: 920,
       tailLength: 7,
-      ttl: 60
+      ttl: 60,
+      width: 24,
+      height: 1,
+      originX: 0.5,
+      originY: 0.5
     };
   }
   /**
@@ -33,9 +37,9 @@ export default class PlayerBullet extends Actor {
   setupGameObjects(x, y) {
     const all = {};
     all.main = this.scene.physics.add.sprite(x, y, 'laser');
-    all.main.setDisplayOrigin(0.5, 0.5);
-    all.main.body.width = 24;
-    all.main.body.height = 1;
+    all.main.setDisplayOrigin(this.originX, this.originY);
+    all.main.body.width = this.width;
+    all.main.body.height = this.height;
     all.main.body.allowGravity = false;
     all.main.play('laserHead');
     return all;

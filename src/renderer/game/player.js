@@ -131,7 +131,7 @@ export default class Player extends Actor {
       firePower: 30,
       firePowerCost: 30,
       firePowerMax: 30,
-      firePowerRecovery: 1,
+      firePowerRecovery: 2,
       fireOffsetXLeft: -24,
       fireOffsetXRight: 8,
       fireOffsetY: 0,
