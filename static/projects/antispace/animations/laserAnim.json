@@ -1,0 +1,149 @@
+{
+  "anims": [
+    {
+      "key": "laserShockwave",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "laser",
+          "frame": "sGunShockwave_0",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sGunShockwave_1",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 16,
+      "duration": 16,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "laserHead",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "laser",
+          "frame": "sLaser_0",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 16,
+      "duration": 16,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "laserTail",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "laser",
+          "frame": "sLaser_0",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaser_1",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaser_2",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaser_3",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaser_4",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaser_5",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaser_6",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 16,
+      "duration": 16,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    },
+    {
+      "key": "laserImpact",
+      "type": "frame",
+      "frames": [
+        {
+          "key": "laser",
+          "frame": "sLaserImpact_0",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaserImpact_1",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaserImpact_2",
+          "duration": 0,
+          "visible": false
+        },
+        {
+          "key": "laser",
+          "frame": "sLaserImpact_3",
+          "duration": 0,
+          "visible": false
+        }
+      ],
+      "frameRate": 16,
+      "duration": 16,
+      "skipMissedFrames": true,
+      "delay": 0,
+      "repeat": 0,
+      "repeatDelay": 0,
+      "yoyo": false,
+      "showOnStart": false,
+      "hideOnComplete": false
+    }
+  ],
+  "globalTimeScale": 1
+}

@@ -1,0 +1,518 @@
+{
+  "frames": [
+    {
+      "filename": "sLaserImpactLight_3",
+      "frame": {
+        "x": 147,
+        "y": 98,
+        "w": 48,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 48
+      }
+    },
+    {
+      "filename": "sLaserLight_0",
+      "frame": {
+        "x": 0,
+        "y": 82,
+        "w": 64,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 32
+      }
+    },
+    {
+      "filename": "sLaserLight_1",
+      "frame": {
+        "x": 0,
+        "y": 115,
+        "w": 64,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 32
+      }
+    },
+    {
+      "filename": "sLaserLight_2",
+      "frame": {
+        "x": 65,
+        "y": 115,
+        "w": 64,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 32
+      }
+    },
+    {
+      "filename": "sLaserLight_3",
+      "frame": {
+        "x": 82,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 32
+      }
+    },
+    {
+      "filename": "sLaserLight_4",
+      "frame": {
+        "x": 82,
+        "y": 66,
+        "w": 64,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 32
+      }
+    },
+    {
+      "filename": "sLaserLight_5",
+      "frame": {
+        "x": 82,
+        "y": 33,
+        "w": 64,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 32
+      }
+    },
+    {
+      "filename": "sLaserLight_6",
+      "frame": {
+        "x": 0,
+        "y": 49,
+        "w": 64,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 64,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 64,
+        "h": 32
+      }
+    },
+    {
+      "filename": "sGunShockwave_0",
+      "frame": {
+        "x": 65,
+        "y": 63,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "sGunShockwave_1",
+      "frame": {
+        "x": 65,
+        "y": 10,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "sLaser_0",
+      "frame": {
+        "x": 65,
+        "y": 27,
+        "w": 16,
+        "h": 1
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 1
+      }
+    },
+    {
+      "filename": "sLaser_1",
+      "frame": {
+        "x": 65,
+        "y": 4,
+        "w": 16,
+        "h": 1
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 1
+      }
+    },
+    {
+      "filename": "sLaser_2",
+      "frame": {
+        "x": 130,
+        "y": 132,
+        "w": 16,
+        "h": 1
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 1
+      }
+    },
+    {
+      "filename": "sLaser_3",
+      "frame": {
+        "x": 65,
+        "y": 2,
+        "w": 16,
+        "h": 1
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 1
+      }
+    },
+    {
+      "filename": "sLaser_4",
+      "frame": {
+        "x": 65,
+        "y": 6,
+        "w": 16,
+        "h": 1
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 1
+      }
+    },
+    {
+      "filename": "sLaser_5",
+      "frame": {
+        "x": 65,
+        "y": 8,
+        "w": 16,
+        "h": 1
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 1
+      }
+    },
+    {
+      "filename": "sLaser_6",
+      "frame": {
+        "x": 65,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 1
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 1
+      }
+    },
+    {
+      "filename": "sLaserImpact_0",
+      "frame": {
+        "x": 65,
+        "y": 29,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "sLaserImpact_1",
+      "frame": {
+        "x": 65,
+        "y": 46,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "sLaserImpact_2",
+      "frame": {
+        "x": 65,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "sLaserImpact_3",
+      "frame": {
+        "x": 130,
+        "y": 115,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "sLaserImpactLight_0",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 48
+      }
+    },
+    {
+      "filename": "sLaserImpactLight_1",
+      "frame": {
+        "x": 147,
+        "y": 49,
+        "w": 48,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 48
+      }
+    },
+    {
+      "filename": "sLaserImpactLight_2",
+      "frame": {
+        "x": 147,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 48,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 48,
+        "h": 48
+      }
+    }
+  ],
+  "meta": {
+    "app": "https://www.leshylabs.com/apps/sstool/",
+    "version": "Leshy SpriteSheet Tool v0.8.4",
+    "image": "laser.png",
+    "size": {
+      "w": 195,
+      "h": 147
+    },
+    "scale": 1
+  }
+}

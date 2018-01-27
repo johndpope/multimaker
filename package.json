@@ -33,9 +33,6 @@
     "phaser": "^3.0.0-beta.19"
   },
   "electronWebpack": {
-    "main": {
-      "webpackConfig": "webpack.main.additions.js"
-    },
     "renderer": {
       "webpackConfig": "webpack.renderer.additions.js"
     }

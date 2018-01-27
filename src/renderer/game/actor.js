@@ -73,6 +73,19 @@ export default class Actor {
     return this.gameObject.body.onFloor();
   }
 
+  get x() {
+    return this.gameObject.x;
+  }
+  set x(x) {
+    this.gameObject.x = x;
+  }
+  get y() {
+    return this.gameObject.y;
+  }
+  set y(y) {
+    this.gameObject.y;
+  }
+
   /**
    * Shortcut to horizontal velocity
    */

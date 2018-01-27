@@ -1,12 +1,6 @@
 import Phaser from 'phaser';
 import Actor from './actor';
-
-/**
- * @typedef {Object} InputMap
- * @prop {boolean} left
- * @prop {boolean} right
- * @prop {boolean} crouch
- */
+import PlayerBullet from './player-bullet';
 
 /**
  * Describes behavior of the player object.
@@ -87,8 +81,46 @@ export default class Player extends Actor {
    */
 
   /**
-   * @orop {boolean} prevOnFloor Whether player was on the floor in the previous frame
+   * @prop {number} firePower Amount of energy available for firing
    */
+
+  /**
+   * @prop {number} firePowerMax Maximum amount of fire power
+   */
+
+  /**
+   * @prop {number} firePowerRecovery Rate at which fire power is recovered
+   */
+
+  /**
+   * @prop {number} firePowerCost Amount of fire power required to fire
+   */
+
+  /**
+   * @prop {number} fireOffsetXLeft Projectile X offset from player position when facing left
+   */
+
+  /**
+   * @prop {number} fireOffsetXLeft Projectile X offset from player position when facing right
+   */
+
+  /**
+   * @prop {number} fireOffsetY Projectile Y offset from player position
+   */
+  
+  /**
+   * @prop {boolean} prevOnFloor Whether we were on the floor in the previous update
+   */
+  
+  /**
+   * @param {Phaser.Scene} scene
+   * @param {number} x
+   * @param {number} y
+   */
+  constructor(scene, x, y) {
+    super(scene, x, y);
+    this.scene.groups.player.add(this);
+  }
 
   get defaults() {
     return {
@@ -96,6 +128,13 @@ export default class Player extends Actor {
       bodyOffsetY: 2,
       crawlSpeed: 30,
       facing: 1,
+      firePower: 30,
+      firePowerCost: 30,
+      firePowerMax: 30,
+      firePowerRecovery: 1,
+      fireOffsetXLeft: -24,
+      fireOffsetXRight: 8,
+      fireOffsetY: 0,
       heightCrawl: 6,
       heightStand: 14,
       isDucking: false,
@@ -105,12 +144,12 @@ export default class Player extends Actor {
       jumpPowerMax: 180,
       leapAccel: 40,
       leapMax: 120,
+      prevOnFloor: false,
       slideBreak: 10,
       slideFactor: 0.97,
       walkAccel: 10,
       walkSpeedMax: 90,
       widthDefault: 8,
-      prevOnFloor: false
     };
   }
 
@@ -149,12 +188,18 @@ export default class Player extends Actor {
    * @param {InputMap} inputs 
    */
   update(inputs) {
-    return this
-      .updateInput(inputs)
-      .updateSlide()
-      .updateFall()
-      .updateShape()
-      .updateAnimation();
+    this.updateInput(inputs);
+
+    this.firePower = Math.min(
+      this.firePowerMax,
+      this.firePower + this.firePowerRecovery
+    );
+
+    this.updateSlide();
+    this.updateFall();
+    this.updateShape();
+    this.updateAnimation();
+    return this;
   }
   /**
    * @param {InputMap} inputs 
@@ -162,6 +207,22 @@ export default class Player extends Actor {
   updateInput(inputs) {
     this.facing = inputs.left ? 0 : inputs.right ? 1 : this.facing;
     
+    if (!(this.isCrouching || this.isDucking)) {
+      if (inputs.fire) {
+        if (this.firePower >= this.firePowerCost) {
+          new PlayerBullet(
+            this.scene,
+            this.x + (this.facing ?
+              this.fireOffsetXRight :
+              this.fireOffsetXLeft),
+            this.y + this.fireOffsetY,
+            this.facing
+          );
+          this.firePower -= this.firePowerCost;
+        }
+      }
+    }
+
     if (!this.onFloor) {
       return this;
     }

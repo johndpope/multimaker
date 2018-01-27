@@ -19,7 +19,6 @@ const game = new Phaser.Game({
     // @todo: Switch to 'matter' so we can use sloped tiles
     default: 'arcade',
     arcade: {
-      // debug: true,
       gravity: {
         y: 450
       }
@@ -35,15 +34,26 @@ const game = new Phaser.Game({
     preload() {
       const AS = path.join(__static, 'projects', 'antispace');
 
+
       const AS_SP = path.join(AS, 'sprites');
-      this.load.atlas(
+      [
         'charles',
-        path.join(AS_SP, 'charles.png'),
-        path.join(AS_SP, 'charles.json')
-      );
+        'laser'
+      ].forEach(spr => {
+        this.load.atlas(
+          spr,
+          path.join(AS_SP, `${spr}.png`),
+          path.join(AS_SP, `${spr}.json`)
+        );
+      });
       
       const AS_AN = path.join(AS, 'animations');
-      this.load.animation('charlesAnim', path.join(AS_AN, 'charles.json'));
+      [
+        'charlesAnim',
+        'laserAnim'
+      ].forEach(anim => {
+        this.load.animation(anim, path.join(AS_AN, `${anim}.json`));
+      });
       
       const AS_TS = path.join(AS, 'tiles');
       this.load.image('tileset00', path.join(AS_TS, 'tsNAZ.png'));
@@ -121,7 +131,7 @@ const game = new Phaser.Game({
     }
     
     setupPlayer() {
-      this.player = new Player(this, 100, 50);
+      this.player = new Player(this, 0, 0);
       this.groups.player.add(this.player.gameObject);
       return this;
     }
@@ -144,7 +154,16 @@ const game = new Phaser.Game({
     }
 
     setupInputs() {
-      this.cursors = this.input.keyboard.createCursorKeys();
+      const kb = this.input.keyboard;
+      const KC = Phaser.Input.Keyboard.KeyCodes;
+      this.keyInputs = {
+        left: kb.addKey(KC.LEFT),
+        right: kb.addKey(KC.RIGHT),
+        up: kb.addKey(KC.UP),
+        down: kb.addKey(KC.DOWN),
+        jump: kb.addKey(KC.S),
+        fire: kb.addKey(KC.D),
+      };
       return this;
     }
 
@@ -153,19 +172,21 @@ const game = new Phaser.Game({
     }
 
     getInputs() {
-      const { cursors: {
+      const { keyInputs: {
         left: { isDown: left },
         right: { isDown: right },
         up: { isDown: up },
         down: { isDown: down },
-        space: { isDown: jump }
+        jump: { isDown: jump },
+        fire: { isDown: fire }
       } } = this;
       return {
         left: left && !right,
         right: right && !left,
         up: up && !down,
         down: down && !up,
-        jump
+        jump,
+        fire
       };
     }
   }
