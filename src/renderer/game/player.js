@@ -150,6 +150,7 @@ export default class Player extends Actor {
       walkAccel: 10,
       walkSpeedMax: 90,
       widthDefault: 8,
+      maxFallSpeed: 300,
     };
   }
 
@@ -281,6 +282,9 @@ export default class Player extends Actor {
     return this;
   }
   updateFall() {
+    if (this.vy > this.maxFallSpeed) {
+      this.vy = this.maxFallSpeed;
+    }
     if (this.onFloor) {
       if (!this.prevOnFloor) {
         this.scene.sound.play('land');

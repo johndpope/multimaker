@@ -1,6 +1,7 @@
 // @ts-check
 
 import { app, BrowserWindow } from 'electron'
+import { enableLiveReload } from 'electron-compile'
 import url from 'url'
 import path from 'path'
 
@@ -9,25 +10,22 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let mainWindow
 
 function createMainWindow() {
+  enableLiveReload({ strategy: 'react-hmr' })
   mainWindow = new BrowserWindow({
     width: 800,
     height: 550,
     autoHideMenuBar: true,
   })
   
-  const url_ = isDevelopment ?
-    `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}` :
-    url.format({
-      pathname: path.join(__dirname, 'index.html'),
-      protocol: 'file:',
-      slashes: true
-    })
-  
   if (isDevelopment) {
     mainWindow.webContents.openDevTools({ mode: "detach" })
   }
   
-  mainWindow.loadURL(url_)
+  mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
 
   mainWindow.on('closed', () => {
     mainWindow = null
