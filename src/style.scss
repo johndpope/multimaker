@@ -8,31 +8,28 @@ $panel-padding: 4px;
 $toolbar-x: 16px;
 $toolbar-y: 20%;
 
-* {
-  background-color: transparent;
-  border: 0;
-  box-sizing: border-box;
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-
-body,
-html {
-  height: 100%;
-  width: 100%;
-}
-
 body {
   background-color: $main-color-bg;
   color: $main-color-fg;
-}
 
-canvas {
-  display: block;
-  height: 100%;
-  margin: auto;
-  width: auto;
+  body,
+  html {
+    height: 100%;
+    width: 100%;
+  }
+
+  &,
+  :not(script) {
+    border: 0;
+    box-sizing: border-box;
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    background-color: transparent;
+  }
 }
 
 .root {
@@ -42,6 +39,13 @@ canvas {
   position: absolute;
   top: 0;
   width: 100%;
+
+  canvas {
+    display: block;
+    height: 100%;
+    margin: auto;
+    width: auto;
+  }
 }
 
 .panel {
@@ -51,9 +55,9 @@ canvas {
 }
 
 .toolbar {
-  position: absolute;
   display: block;
   left: $toolbar-x;
+  position: absolute;
   top: $toolbar-y;
 }
 

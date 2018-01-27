@@ -10,7 +10,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 let mainWindow
 
 function createMainWindow() {
-  enableLiveReload({ strategy: 'react-hmr' })
+  enableLiveReload()
   mainWindow = new BrowserWindow({
     width: 800,
     height: 550,

@@ -1,13 +1,13 @@
 import Phaser from 'phaser';
-import Actor from './actor';
+import GameObjectController from '.';
 import PlayerBullet from './player-bullet';
 
 /**
- * Describes behavior of the player object.
+ * Controls the player object.
  * 
  * Should NOT contain code that pertains to other objects or game-global data.
  */
-export default class Player extends Actor {
+export default class Player extends GameObjectController {
   /**
    * @prop {number} bodyOffsetX Horizontal offset of the physical bounding box relative to the sprite
    */
@@ -17,15 +17,15 @@ export default class Player extends Actor {
    */
   
   /**
-   * @prop {number} heightStand of player when standing
+   * @prop {number} bodyHStand of player when standing
    */
   
   /**
-   * @prop {number} heightCrawl of player when crawling
+   * @prop {number} bodyHCrawl of player when crawling
    */
   
   /**
-   * @prop {number} widthDefault player at all times
+   * @prop {number} bodyW player at all times
    */
   
   /**
@@ -122,21 +122,22 @@ export default class Player extends Actor {
     this.scene.groups.player.add(this);
   }
 
-  get defaults() {
+  get defaultConfig() {
     return {
+      bodyHCrawl: 6,
+      bodyHStand: 14,
       bodyOffsetX: 4,
       bodyOffsetY: 2,
+      bodyW: 8,
       crawlSpeed: 30,
       facing: 1,
+      fireOffsetXLeft: -24,
+      fireOffsetXRight: 8,
+      fireOffsetY: 0,
       firePower: 30,
       firePowerCost: 30,
       firePowerMax: 30,
       firePowerRecovery: 2,
-      fireOffsetXLeft: -24,
-      fireOffsetXRight: 8,
-      fireOffsetY: 0,
-      heightCrawl: 6,
-      heightStand: 14,
       isDucking: false,
       isSliding: false,
       jumpPower: 0,
@@ -144,13 +145,12 @@ export default class Player extends Actor {
       jumpPowerMax: 180,
       leapAccel: 40,
       leapMax: 120,
+      maxFallSpeed: 300,
       prevOnFloor: false,
       slideBreak: 10,
       slideFactor: 0.97,
       walkAccel: 10,
       walkSpeedMax: 90,
-      widthDefault: 8,
-      maxFallSpeed: 300,
     };
   }
 
@@ -189,18 +189,13 @@ export default class Player extends Actor {
    * @param {InputMap} inputs 
    */
   update(inputs) {
-    this.updateInput(inputs);
-
-    this.firePower = Math.min(
-      this.firePowerMax,
-      this.firePower + this.firePowerRecovery
-    );
-
-    this.updateSlide();
-    this.updateFall();
-    this.updateShape();
-    this.updateAnimation();
-    return this;
+    return this
+      .updateInput(inputs)
+      .updateFirePower()
+      .updateSlide()
+      .updateFall()
+      .updateShape()
+      .updateDisplay();
   }
   /**
    * @param {InputMap} inputs 
@@ -208,32 +203,22 @@ export default class Player extends Actor {
   updateInput(inputs) {
     this.facing = inputs.left ? 0 : inputs.right ? 1 : this.facing;
     
-    if (!(this.isCrouching || this.isDucking)) {
-      if (inputs.fire) {
-        if (this.firePower >= this.firePowerCost) {
-          new PlayerBullet(
-            this.scene,
-            this.x + (this.facing ?
-              this.fireOffsetXRight :
-              this.fireOffsetXLeft),
-            this.y + this.fireOffsetY,
-            this.facing
-          );
-          this.firePower -= this.firePowerCost;
-        }
-      }
+    if (!(this.isCrouching || this.isDucking) && inputs.fire) {
+      this.fire();
     }
+    
+    const { body, body: { velocity: { x: vx, y: vy } } } = this.main;
 
-    if (!this.onFloor) {
+    if (!body.onFloor()) {
       return this;
     }
     
     if (inputs.down) {
-      if (!this.isDucking && this.vx !== 0) {
+      if (!this.isDucking && vx !== 0) {
         this.isSliding = true;
       }
       this.isDucking = true;
-      if (this.vx === 0) {
+      if (vx === 0) {
         this.isSliding = false;
       }
       if (!this.isSliding) {
@@ -254,9 +239,6 @@ export default class Player extends Actor {
         this.isSliding = true;
       } else if (this.jumpPower !== 0) {
         this.releaseJump();
-        if (this.vx !== 0) {
-          this.leap();
-        }
       } else {
         this.isSliding = false;
         if (inputs.left) {
@@ -270,52 +252,63 @@ export default class Player extends Actor {
     } 
     return this;
   }
+  updateFirePower() {
+    this.firePower = Math.min(
+      this.firePowerMax,
+      this.firePower + this.firePowerRecovery
+    );
+    return this;
+  }
   updateSlide() {
+    const { main, slideFactor, slideBreak } = this;
+    const { body } = main;
     if (!this.isSliding) {
       return this;
     }
-    this.vx *= this.slideFactor;
-    if (Math.abs(this.vx) < this.slideBreak) {
+    main.setVelocityX(body.velocity.x * slideFactor);
+    if (Math.abs(body.velocity.x) < slideBreak) {
       this.isSliding = false;
-      this.vx = 0;
+      main.setVelocityX(0);
     }
     return this;
   }
   updateFall() {
-    if (this.vy > this.maxFallSpeed) {
-      this.vy = this.maxFallSpeed;
-    }
-    if (this.onFloor) {
+    const { maxFallSpeed, scene, main } = this;
+    const { body } = main;
+    main.setVelocityY(Math.min(maxFallSpeed, body.velocity.y));
+    if (body.onFloor()) {
       if (!this.prevOnFloor) {
-        this.scene.sound.play('land');
+        scene.sound.play('land');
       }
       this.prevOnFloor = true;
       return this;
     }
     this.prevOnFloor = false;
-    this.jumpPower = 0;
     this.isDucking = false;
     this.isSliding = false;
+    this.jumpPower = 0;
     return this;
   }
   updateShape() {
-    const { gameObject: gobj, heightStand, heightCrawl,
-      bodyOffsetX, bodyOffsetY, isDucking } = this;
-    gobj.body.width = this.widthDefault;
-    const correctHeight = isDucking ? heightCrawl : heightStand;
-    const deltaHeight = gobj.body.height - correctHeight;
-    gobj.body.height = correctHeight;
-    gobj.body.setOffset(
+    const { main, bodyHStand, bodyW, bodyHCrawl, bodyOffsetX, bodyOffsetY,
+      isDucking } = this;
+    const { body } = main;
+    body.width = bodyW;
+    const correctHeight = isDucking ? bodyHCrawl : bodyHStand;
+    const deltaHeight = body.height - correctHeight;
+    body.height = correctHeight;
+    body.setOffset(
       bodyOffsetX,
-      bodyOffsetY + (isDucking ? (heightStand - heightCrawl) : 0)
+      bodyOffsetY + (isDucking ? (bodyHStand - bodyHCrawl) : 0)
     );
     return this;
   }
-  updateAnimation() {
-    const { gameObject: gobj, vx, vy, onFloor,
-      isSliding, isDucking, isCrouching, facing } = this;
+  updateDisplay() {
+    const { main, isSliding, isDucking, isCrouching, facing } = this;
+    const { body } = main;
+    const { x: vx, y: vy } = main.body.velocity;
     const anim =
-      (onFloor) ?
+      (body.onFloor()) ?
         (isDucking) ?
           (vx === 0) ?
             'duck' :
@@ -330,13 +323,22 @@ export default class Player extends Actor {
       (vy < 0) ?
         'jump' :
       'fall';
-
-    if (gobj.anims.currentAnim.key !== anim) {
-      gobj.play(anim);
+    if (main.anims.currentAnim.key !== anim) {
+      main.play(anim);
     }
-
-    gobj.flipX = !facing;
-
+    main.flipX = !facing;
+    return this;
+  }
+  fire() {
+    const { firePower, firePowerCost, main, fireOffsetXLeft, fireOffsetXRight,
+      fireOffsetY, facing, scene } = this;
+    const { x, y } = main.body;
+    if (firePower >= firePowerCost) {
+      const pbX = x + (facing ? fireOffsetXRight : fireOffsetXLeft);
+      const pbY = y + fireOffsetY;
+      new PlayerBullet(scene, pbX, pbY, facing);
+      this.firePower -= firePowerCost;
+    }
     return this;
   }
   buildJump() {
@@ -347,45 +349,52 @@ export default class Player extends Actor {
     return this;
   }
   releaseJump() {
-    this.vy = -this.jumpPower;
-    this.scene.sound.play('jump');
-    return this;
-  }
-  leap() {
-    const { leapMax, leapAccel, facing, vx } = this;
-    this.vx = (facing === 1) ?
+    const { scene, main, jumpPower } = this;
+    const { body } = main;
+    const { x: vx, y: vy } = body.velocity;
+    scene.sound.play('jump');
+    body.setVelocityY(-jumpPower);
+    if (vx === 0) {
+      return this;
+    }
+    const { leapMax, leapAccel, facing } = this;
+    main.setVelocityX((facing === 1) ?
       Math.min(leapMax, vx + leapAccel) :
-      Math.max(-leapMax, vx - leapAccel);
+      Math.max(-leapMax, vx - leapAccel));
     return this;
   }
   walkLeft() {
-    this.vx = Math.max(this.vx - this.walkAccel, -this.walkSpeedMax);
+    const {main: {body: {velocity: {x: vx}}}, walkAccel, walkSpeedMax} = this;
+    this.main.setVelocityX(Math.max(vx - walkAccel, -walkSpeedMax));
     return this;
   }
   walkRight() {
-    this.vx = Math.min(this.vx + this.walkAccel, this.walkSpeedMax);
+    const {main: {body: {velocity: {x: vx}}}, walkAccel, walkSpeedMax} = this;
+    this.main.setVelocityX(Math.min(vx + walkAccel, walkSpeedMax));
     return this;
   }
   stopWalking() {
-    const { walkAccel, vx } = this;
+    const { walkAccel, main } = this;
+    const { x: vx, y: vy } = main.body.velocity;
     this.isSliding = false;
     if (vx === 0) {
       return;
     }
-    this.vx =
-      (vx > 0) ? Math.max(vx - walkAccel, 0) : Math.min(vx + walkAccel, 0);
+    main.setVelocity(
+      (vx > 0) ? Math.max(vx - walkAccel, 0) : Math.min(vx + walkAccel, 0)
+    );
     return this;
   }
   crawlLeft() {
-    this.vx = -this.crawlSpeed;
+    this.main.setVelocityX(-this.crawlSpeed);
     return this;
   }
   crawlRight() {
-    this.vx = this.crawlSpeed;
+    this.main.setVelocityX(this.crawlSpeed);
     return this;
   }
   stopCrawling() {
-    this.vx = 0;
+    this.main.setVelocityX(0);
     return this;
   }
 }

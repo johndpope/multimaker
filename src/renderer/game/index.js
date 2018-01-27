@@ -3,7 +3,7 @@ import fs from 'fs';
 import _ from 'lodash';
 import Phaser from 'phaser';
 import flod from '../flod';
-import Player from './player';
+import Player from './goc/player';
 
 export default class Game extends Phaser.Game {
   /**
@@ -77,8 +77,8 @@ class RootScene extends Phaser.Scene {
       this.load.audio(snd, path.join(AS_SO, `${snd}.wav`));
     });
 
-    const AS_MU = path.join(AS, 'music');
-    this.load.binary('nazXm', path.join(AS_MU, 'naz.xm'));
+    // const AS_MU = path.join(AS, 'music');
+    // this.load.binary('nazXm', path.join(AS_MU, 'naz.xm'));
   }
   create() {
     setTimeout(() => {
@@ -121,7 +121,7 @@ class RootScene extends Phaser.Scene {
   }
 
   setupTilemaps() {
-    flod.load(this.cache.binary.get('nazXm')).play();
+    // flod.load(this.cache.binary.get('nazXm')).play();
     
     // TODO: Allow loading various tilemaps
     // TODO: Allow the tilemap to determine ALL level content
@@ -137,12 +137,11 @@ class RootScene extends Phaser.Scene {
   
   setupPlayer() {
     this.player = new Player(this, 100,100);
-    this.groups.player.add(this.player.gameObject);
     return this;
   }
   
   setupCollisions() {
-    this.physics.add.collider(this.player.gameObject, this.tilemapLayer);
+    this.physics.add.collider(this.player.main, this.tilemapLayer);
     return this;
   }
 
@@ -154,7 +153,7 @@ class RootScene extends Phaser.Scene {
       this.tilemap.widthInPixels,
       this.tilemap.heightInPixels
     );
-    this.cameras.main.startFollow(this.player.gameObject);
+    this.cameras.main.startFollow(this.player.main);
     return this;
   }
 

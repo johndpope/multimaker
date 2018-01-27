@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
-import Actor from './actor';
+import GameObjectController from '.';
 
-export default class PlayerBullet extends Actor {
+export default class PlayerBullet extends GameObjectController {
   constructor(scene, x, y, facing) {
     super(scene, x, y);
     this.scene.groups.bullet.add(this);
@@ -9,13 +9,13 @@ export default class PlayerBullet extends Actor {
     this.facing = facing;
     this.vx = facing ? this.maxSpeed : -this.maxSpeed;
   }
-  get defaults() {
+  get defaultConfig() {
     return {
       maxSpeed: 920,
       tailLength: 7,
       ttl: 60,
-      width: 24,
-      height: 1,
+      bodyW: 24,
+      bodyH: 1,
       originX: 0.5,
       originY: 0.5
     };
@@ -38,13 +38,13 @@ export default class PlayerBullet extends Actor {
     const all = {};
     all.main = this.scene.physics.add.sprite(x, y, 'laser');
     all.main.setDisplayOrigin(this.originX, this.originY);
-    all.main.body.width = this.width;
-    all.main.body.height = this.height;
+    all.main.body.width = this.bodyW;
+    all.main.body.height = this.bodyH;
     all.main.body.allowGravity = false;
     all.main.play('laserHead');
     return all;
   }
-  resettailParticle() {
+  resetTailParticle() {
 
   }
 }
