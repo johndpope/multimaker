@@ -176,7 +176,7 @@ export default class Player extends GameObjectController {
    * @return {Phaser.GameObject[]}
    */
   setupGameObjects(x, y) {
-    const main = this.scene.physics.add.sprite(x, y, 'charles');
+    const main = this.scene.physics.add.sprite(x, y, 'player');
     main.body.setBounce(0);
     return { main };
   }

@@ -5,8 +5,8 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesStandGun_0",
+          "key": "player",
+          "frame": "player_stand_gun_0",
           "duration": 0,
           "visible": false
         }
@@ -26,50 +26,50 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_0",
+          "key": "player",
+          "frame": "player_walk_gun_0",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_1",
+          "key": "player",
+          "frame": "player_walk_gun_1",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_2",
+          "key": "player",
+          "frame": "player_walk_gun_2",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_3",
+          "key": "player",
+          "frame": "player_walk_gun_3",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_4",
+          "key": "player",
+          "frame": "player_walk_gun_4",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_5",
+          "key": "player",
+          "frame": "player_walk_gun_5",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_6",
+          "key": "player",
+          "frame": "player_walk_gun_6",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesWalkGun_7",
+          "key": "player",
+          "frame": "player_walk_gun_7",
           "duration": 0,
           "visible": false
         }
@@ -89,26 +89,26 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesCrawl_0",
+          "key": "player",
+          "frame": "player_crawl_0",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesCrawl_1",
+          "key": "player",
+          "frame": "player_crawl_1",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesCrawl_2",
+          "key": "player",
+          "frame": "player_crawl_2",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "charles",
-          "frame": "sCharlesCrawl_3",
+          "key": "player",
+          "frame": "player_crawl_3",
           "duration": 0,
           "visible": false
         }
@@ -128,8 +128,8 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesCrawl_2",
+          "key": "player",
+          "frame": "player_crawl_2",
           "duration": 0,
           "visible": false
         }
@@ -149,8 +149,8 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesCrawl_0",
+          "key": "player",
+          "frame": "player_crawl_0",
           "duration": 0,
           "visible": false
         }
@@ -170,8 +170,8 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesCrouch_0",
+          "key": "player",
+          "frame": "player_crouch_0",
           "duration": 0,
           "visible": false
         }
@@ -191,8 +191,8 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesFallGun_0",
+          "key": "player",
+          "frame": "player_fall_gun_0",
           "duration": 0,
           "visible": false
         }
@@ -212,8 +212,8 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesFireGun_0",
+          "key": "player",
+          "frame": "player_fire_gun_0",
           "duration": 0,
           "visible": false
         }
@@ -233,8 +233,8 @@
       "type": "frame",
       "frames": [
         {
-          "key": "charles",
-          "frame": "sCharlesJumpGun_0",
+          "key": "player",
+          "frame": "player_jump_gun_0",
           "duration": 0,
           "visible": false
         }

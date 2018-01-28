@@ -1,7 +1,7 @@
 {
   "frames": [
     {
-      "filename": "sLaserImpactLight_3",
+      "filename": "player_bullet_impact_light_3",
       "frame": {
         "x": 147,
         "y": 98,
@@ -22,7 +22,7 @@
       }
     },
     {
-      "filename": "sLaserLight_0",
+      "filename": "player_bullet_light_0",
       "frame": {
         "x": 0,
         "y": 82,
@@ -43,7 +43,7 @@
       }
     },
     {
-      "filename": "sLaserLight_1",
+      "filename": "player_bullet_light_1",
       "frame": {
         "x": 0,
         "y": 115,
@@ -64,7 +64,7 @@
       }
     },
     {
-      "filename": "sLaserLight_2",
+      "filename": "player_bullet_light_2",
       "frame": {
         "x": 65,
         "y": 115,
@@ -85,7 +85,7 @@
       }
     },
     {
-      "filename": "sLaserLight_3",
+      "filename": "player_bullet_light_3",
       "frame": {
         "x": 82,
         "y": 0,
@@ -106,7 +106,7 @@
       }
     },
     {
-      "filename": "sLaserLight_4",
+      "filename": "player_bullet_light_4",
       "frame": {
         "x": 82,
         "y": 66,
@@ -127,7 +127,7 @@
       }
     },
     {
-      "filename": "sLaserLight_5",
+      "filename": "player_bullet_light_5",
       "frame": {
         "x": 82,
         "y": 33,
@@ -148,7 +148,7 @@
       }
     },
     {
-      "filename": "sLaserLight_6",
+      "filename": "player_bullet_light_6",
       "frame": {
         "x": 0,
         "y": 49,
@@ -169,7 +169,7 @@
       }
     },
     {
-      "filename": "sGunShockwave_0",
+      "filename": "player_bullet_shockwave_0",
       "frame": {
         "x": 65,
         "y": 63,
@@ -190,7 +190,7 @@
       }
     },
     {
-      "filename": "sGunShockwave_1",
+      "filename": "player_bullet_shockwave_1",
       "frame": {
         "x": 65,
         "y": 10,
@@ -211,7 +211,7 @@
       }
     },
     {
-      "filename": "sLaser_0",
+      "filename": "player_bullet_0",
       "frame": {
         "x": 65,
         "y": 27,
@@ -232,7 +232,7 @@
       }
     },
     {
-      "filename": "sLaser_1",
+      "filename": "player_bullet_1",
       "frame": {
         "x": 65,
         "y": 4,
@@ -253,7 +253,7 @@
       }
     },
     {
-      "filename": "sLaser_2",
+      "filename": "player_bullet_2",
       "frame": {
         "x": 130,
         "y": 132,
@@ -274,7 +274,7 @@
       }
     },
     {
-      "filename": "sLaser_3",
+      "filename": "player_bullet_3",
       "frame": {
         "x": 65,
         "y": 2,
@@ -295,7 +295,7 @@
       }
     },
     {
-      "filename": "sLaser_4",
+      "filename": "player_bullet_4",
       "frame": {
         "x": 65,
         "y": 6,
@@ -316,7 +316,7 @@
       }
     },
     {
-      "filename": "sLaser_5",
+      "filename": "player_bullet_5",
       "frame": {
         "x": 65,
         "y": 8,
@@ -337,7 +337,7 @@
       }
     },
     {
-      "filename": "sLaser_6",
+      "filename": "player_bullet_6",
       "frame": {
         "x": 65,
         "y": 0,
@@ -358,7 +358,7 @@
       }
     },
     {
-      "filename": "sLaserImpact_0",
+      "filename": "player_bullet_impact_0",
       "frame": {
         "x": 65,
         "y": 29,
@@ -379,7 +379,7 @@
       }
     },
     {
-      "filename": "sLaserImpact_1",
+      "filename": "player_bullet_impact_1",
       "frame": {
         "x": 65,
         "y": 46,
@@ -400,7 +400,7 @@
       }
     },
     {
-      "filename": "sLaserImpact_2",
+      "filename": "player_bullet_impact_2",
       "frame": {
         "x": 65,
         "y": 80,
@@ -421,7 +421,7 @@
       }
     },
     {
-      "filename": "sLaserImpact_3",
+      "filename": "player_bullet_impact_3",
       "frame": {
         "x": 130,
         "y": 115,
@@ -442,7 +442,7 @@
       }
     },
     {
-      "filename": "sLaserImpactLight_0",
+      "filename": "player_bullet_impact_light_0",
       "frame": {
         "x": 0,
         "y": 0,
@@ -463,7 +463,7 @@
       }
     },
     {
-      "filename": "sLaserImpactLight_1",
+      "filename": "player_bullet_impact_light_1",
       "frame": {
         "x": 147,
         "y": 49,
@@ -484,7 +484,7 @@
       }
     },
     {
-      "filename": "sLaserImpactLight_2",
+      "filename": "player_bullet_impact_light_2",
       "frame": {
         "x": 147,
         "y": 0,
@@ -508,7 +508,7 @@
   "meta": {
     "app": "https://www.leshylabs.com/apps/sstool/",
     "version": "Leshy SpriteSheet Tool v0.8.4",
-    "image": "laser.png",
+    "image": "player_bullet.png",
     "size": {
       "w": 195,
       "h": 147

@@ -1,18 +1,18 @@
 {
   "anims": [
     {
-      "key": "laserShockwave",
+      "key": "player_bullet_shockwave",
       "type": "frame",
       "frames": [
         {
-          "key": "laser",
-          "frame": "sGunShockwave_0",
+          "key": "player_bullet",
+          "frame": "player_bullet_shockwave_0",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sGunShockwave_1",
+          "key": "player_bullet",
+          "frame": "player_bullet_shockwave_1",
           "duration": 0,
           "visible": false
         }
@@ -28,12 +28,12 @@
       "hideOnComplete": false
     },
     {
-      "key": "laserHead",
+      "key": "player_bullet_head",
       "type": "frame",
       "frames": [
         {
-          "key": "laser",
-          "frame": "sLaser_0",
+          "key": "player_bullet",
+          "frame": "player_bullet_0",
           "duration": 0,
           "visible": false
         }
@@ -49,48 +49,48 @@
       "hideOnComplete": false
     },
     {
-      "key": "laserTail",
+      "key": "player_bullet_tail",
       "type": "frame",
       "frames": [
         {
-          "key": "laser",
-          "frame": "sLaser_0",
+          "key": "player_bullet",
+          "frame": "player_bullet_0",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaser_1",
+          "key": "player_bullet",
+          "frame": "player_bullet_1",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaser_2",
+          "key": "player_bullet",
+          "frame": "player_bullet_2",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaser_3",
+          "key": "player_bullet",
+          "frame": "player_bullet_3",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaser_4",
+          "key": "player_bullet",
+          "frame": "player_bullet_4",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaser_5",
+          "key": "player_bullet",
+          "frame": "player_bullet_5",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaser_6",
+          "key": "player_bullet",
+          "frame": "player_bullet_6",
           "duration": 0,
           "visible": false
         }
@@ -106,30 +106,30 @@
       "hideOnComplete": false
     },
     {
-      "key": "laserImpact",
+      "key": "player_bullet_impact",
       "type": "frame",
       "frames": [
         {
-          "key": "laser",
-          "frame": "sLaserImpact_0",
+          "key": "player_bullet",
+          "frame": "player_bullet_impact_0",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaserImpact_1",
+          "key": "player_bullet",
+          "frame": "player_bullet_impact_1",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaserImpact_2",
+          "key": "player_bullet",
+          "frame": "player_bullet_impact_2",
           "duration": 0,
           "visible": false
         },
         {
-          "key": "laser",
-          "frame": "sLaserImpact_3",
+          "key": "player_bullet",
+          "frame": "player_bullet_impact_3",
           "duration": 0,
           "visible": false
         }

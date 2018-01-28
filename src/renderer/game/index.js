@@ -46,10 +46,50 @@ class RootScene extends Phaser.Scene {
   }
   preload() {
     const { projectPath } = this;
-    const SP = path.join(projectPath, 'sprites');
+
+    const AN = path.join(projectPath, 'an');
     [
-      'charles',
-      'laser'
+      'player',
+      'player_bullet'
+    ].forEach(anim => {
+      this.load.animation(anim, path.join(AN, `${anim}.json`));
+    });
+
+    const BG = path.join(projectPath, 'bg');
+    [
+      'area_0_0',
+      'area_0_1',
+      'area_0_2',
+      'area_0_3',
+      'area_0_4',
+    ].forEach(bg => {
+      this.load.image(bg, path.join(BG, `${bg}.png`));
+    });
+
+    const MU = path.join(projectPath, 'mu');
+    [
+      'area_0'
+    ].forEach(mu => {
+      this.load.binary(mu, path.join(MU, `${mu}.xm`));
+    });
+
+    const SO = path.join(projectPath, 'so');
+    [
+      'crunch',
+      'footstep',
+      'jump',
+      'land',
+      'player_bullet_impact',
+      'player_bullet',
+    ].forEach(snd => {
+      // TODO: Upgrade to .ogg
+      this.load.audio(snd, path.join(SO, `${snd}.wav`));
+    });
+
+    const SP = path.join(projectPath, 'sp');
+    [
+      'player',
+      'player_bullet'
     ].forEach(spr => {
       this.load.atlas(
         spr,
@@ -57,36 +97,22 @@ class RootScene extends Phaser.Scene {
         path.join(SP, `${spr}.json`)
       );
     });
-    
-    const AN = path.join(projectPath, 'animations');
+
+    const TM = path.join(projectPath, 'tm');
     [
-      'charlesAnim',
-      'laserAnim'
-    ].forEach(anim => {
-      this.load.animation(anim, path.join(AN, `${anim}.json`));
+      'area_0_0'
+    ].forEach(tm => {
+
+      this.load.tilemapTiledJSON(tm, path.join(TM, `${tm}.json`));
     });
     
-    const TS = path.join(projectPath, 'tiles');
-    this.load.image('tileset00', path.join(TS, 'tsNAZ.png'));
-    
-    const TM = path.join(projectPath, 'maps');
-    this.load.tilemapTiledJSON('room000', path.join(TM, 'room000.json'));
-
-    const SO = path.join(projectPath, 'sounds');
+    const TS = path.join(projectPath, 'ts');
     [
-      'chink',
-      'crunch',
-      'footstep',
-      'jump',
-      'land',
-      'pew',
-    ].forEach(snd => {
-      // TODO: Upgrade to .ogg
-      this.load.audio(snd, path.join(SO, `${snd}.wav`));
-    });
+      'area_0'
+    ].forEach(ts => {
 
-    // const MU = path.join(projectPath, 'music');
-    // this.load.binary('nazXm', path.join(MU, 'naz.xm'));
+      this.load.image(ts, path.join(TS, `${ts}.png`));
+    });
   }
   create() {
     setTimeout(() => {
@@ -129,13 +155,13 @@ class RootScene extends Phaser.Scene {
   }
 
   setupTilemaps() {
-    // flod.load(this.cache.binary.get('nazXm')).play();
+    flod.load(this.cache.binary.get('area_0')).play();
     
     // TODO: Allow loading various tilemaps
     // TODO: Allow the tilemap to determine ALL level content
-    this.tilemap = this.add.tilemap('room000');
+    this.tilemap = this.add.tilemap('area_0_0');
     // TODO: Load tilesets based on tilemap data
-    this.tileset = this.tilemap.addTilesetImage('tileset00');
+    this.tileset = this.tilemap.addTilesetImage('area_0');
     // TODO: Allow multiple tilemap layers
     this.tilemapLayer =
       this.tilemap.createStaticLayer(0, this.tileset, 0, 0);

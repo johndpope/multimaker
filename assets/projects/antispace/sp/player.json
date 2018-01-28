@@ -1,7 +1,7 @@
 {
   "frames": [
     {
-      "filename": "sCharlesWalkGun_0",
+      "filename": "player_walk_gun_0",
       "frame": {
         "x": 0,
         "y": 0,
@@ -22,7 +22,7 @@
       }
     },
     {
-      "filename": "sCharlesWalkGun_1",
+      "filename": "player_walk_gun_1",
       "frame": {
         "x": 0,
         "y": 17,
@@ -43,7 +43,7 @@
       }
     },
     {
-      "filename": "sCharlesWalkGun_2",
+      "filename": "player_walk_gun_2",
       "frame": {
         "x": 17,
         "y": 0,
@@ -64,94 +64,9 @@
       }
     },
     {
-      "filename": "sCharlesWalkGun_3",
+      "filename": "player_walk_gun_3",
       "frame": {
         "x": 17,
-        "y": 17,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      },
-      "sound": "footstep"
-    },
-    {
-      "filename": "sCharlesWalkGun_4",
-      "frame": {
-        "x": 0,
-        "y": 34,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    {
-      "filename": "sCharlesWalkGun_5",
-      "frame": {
-        "x": 17,
-        "y": 34,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    {
-      "filename": "sCharlesWalkGun_6",
-      "frame": {
-        "x": 34,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {
-        "x": 0,
-        "y": 0,
-        "w": 16,
-        "h": 16
-      },
-      "sourceSize": {
-        "w": 16,
-        "h": 16
-      }
-    },
-    {
-      "filename": "sCharlesWalkGun_7",
-      "frame": {
-        "x": 34,
         "y": 17,
         "w": 16,
         "h": 16
@@ -171,7 +86,92 @@
       "sound": "footstep"
     },
     {
-      "filename": "sCharlesWalk_0",
+      "filename": "player_walk_gun_4",
+      "frame": {
+        "x": 0,
+        "y": 34,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "player_walk_gun_5",
+      "frame": {
+        "x": 17,
+        "y": 34,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "player_walk_gun_6",
+      "frame": {
+        "x": 34,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "filename": "player_walk_gun_7",
+      "frame": {
+        "x": 34,
+        "y": 17,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      },
+      "sound": "footstep"
+    },
+    {
+      "filename": "player_walk_0",
       "frame": {
         "x": 34,
         "y": 34,
@@ -192,7 +192,7 @@
       }
     },
     {
-      "filename": "sCharlesWalk_1",
+      "filename": "player_walk_1",
       "frame": {
         "x": 0,
         "y": 51,
@@ -213,7 +213,7 @@
       }
     },
     {
-      "filename": "sCharlesWalk_2",
+      "filename": "player_walk_2",
       "frame": {
         "x": 17,
         "y": 51,
@@ -234,7 +234,7 @@
       }
     },
     {
-      "filename": "sCharlesWalk_3",
+      "filename": "player_walk_3",
       "frame": {
         "x": 34,
         "y": 51,
@@ -255,7 +255,7 @@
       }
     },
     {
-      "filename": "sCharlesWalk_4",
+      "filename": "player_walk_4",
       "frame": {
         "x": 51,
         "y": 0,
@@ -276,7 +276,7 @@
       }
     },
     {
-      "filename": "sCharlesWalk_5",
+      "filename": "player_walk_5",
       "frame": {
         "x": 51,
         "y": 17,
@@ -297,7 +297,7 @@
       }
     },
     {
-      "filename": "sCharlesWalk_6",
+      "filename": "player_walk_6",
       "frame": {
         "x": 51,
         "y": 34,
@@ -318,7 +318,7 @@
       }
     },
     {
-      "filename": "sCharlesWalk_7",
+      "filename": "player_walk_7",
       "frame": {
         "x": 51,
         "y": 51,
@@ -339,7 +339,7 @@
       }
     },
     {
-      "filename": "sCharlesCrawl_0",
+      "filename": "player_crawl_0",
       "frame": {
         "x": 0,
         "y": 68,
@@ -360,7 +360,7 @@
       }
     },
     {
-      "filename": "sCharlesCrawl_1",
+      "filename": "player_crawl_1",
       "frame": {
         "x": 17,
         "y": 68,
@@ -381,7 +381,7 @@
       }
     },
     {
-      "filename": "sCharlesCrawl_2",
+      "filename": "player_crawl_2",
       "frame": {
         "x": 34,
         "y": 68,
@@ -402,7 +402,7 @@
       }
     },
     {
-      "filename": "sCharlesCrawl_3",
+      "filename": "player_crawl_3",
       "frame": {
         "x": 51,
         "y": 68,
@@ -423,7 +423,7 @@
       }
     },
     {
-      "filename": "sCharlesCrouch_0",
+      "filename": "player_crouch_0",
       "frame": {
         "x": 68,
         "y": 0,
@@ -444,7 +444,7 @@
       }
     },
     {
-      "filename": "sCharlesDuckGun_0",
+      "filename": "player_duck_gun_0",
       "frame": {
         "x": 68,
         "y": 17,
@@ -465,7 +465,7 @@
       }
     },
     {
-      "filename": "sCharlesFallGun_0",
+      "filename": "player_fall_gun_0",
       "frame": {
         "x": 68,
         "y": 34,
@@ -486,7 +486,7 @@
       }
     },
     {
-      "filename": "sCharlesFall_0",
+      "filename": "player_fall_0",
       "frame": {
         "x": 68,
         "y": 51,
@@ -507,7 +507,7 @@
       }
     },
     {
-      "filename": "sCharlesFireGun_0",
+      "filename": "player_fire_gun_0",
       "frame": {
         "x": 68,
         "y": 68,
@@ -528,7 +528,7 @@
       }
     },
     {
-      "filename": "sCharlesJumpGun_0",
+      "filename": "player_jump_gun_0",
       "frame": {
         "x": 0,
         "y": 85,
@@ -549,7 +549,7 @@
       }
     },
     {
-      "filename": "sCharlesJump_0",
+      "filename": "player_jump_0",
       "frame": {
         "x": 17,
         "y": 85,
@@ -570,7 +570,7 @@
       }
     },
     {
-      "filename": "sCharlesMask_0",
+      "filename": "player_mask_0",
       "frame": {
         "x": 34,
         "y": 85,
@@ -591,7 +591,7 @@
       }
     },
     {
-      "filename": "sCharlesMaskLow_0",
+      "filename": "player_mask_low_0",
       "frame": {
         "x": 51,
         "y": 85,
@@ -612,7 +612,7 @@
       }
     },
     {
-      "filename": "sCharlesStandGun_0",
+      "filename": "player_stand_gun_0",
       "frame": {
         "x": 68,
         "y": 85,
@@ -633,7 +633,7 @@
       }
     },
     {
-      "filename": "sCharlesStandGun_1",
+      "filename": "player_stand_gun_1",
       "frame": {
         "x": 85,
         "y": 0,
@@ -654,7 +654,7 @@
       }
     },
     {
-      "filename": "sCharlesStand_0",
+      "filename": "player_stand_0",
       "frame": {
         "x": 85,
         "y": 17,
@@ -678,7 +678,7 @@
   "meta": {
     "app": "https://www.leshylabs.com/apps/sstool/",
     "version": "Leshy SpriteSheet Tool v0.8.4",
-    "image": "charles.png",
+    "image": "player.png",
     "size": {
       "w": 101,
       "h": 101
