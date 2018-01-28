@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
-import GameObjectController from '.';
+import Base from './base';
 
-export default class PlayerBullet extends GameObjectController {
+export default class PlayerBullet extends Base {
   constructor(scene, x, y, facing) {
     super(scene, x, y);
     this.scene.groups.bullet.add(this);

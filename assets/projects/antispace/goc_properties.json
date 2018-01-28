@@ -1,0 +1,19 @@
+[
+    {
+        "color": "#ffff0000",
+        "name": "Player",
+        "properties": [
+            {
+                "name": "size",
+                "type": "int",
+                "value": 4
+            }
+        ]
+    },
+    {
+        "color": "#ff00aa00",
+        "name": "Room",
+        "properties": [
+        ]
+    }
+]

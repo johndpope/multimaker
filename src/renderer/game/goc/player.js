@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import GameObjectController from '.';
+import Base from './base';
 import PlayerBullet from './player-bullet';
 
 /**
@@ -7,7 +7,7 @@ import PlayerBullet from './player-bullet';
  * 
  * Should NOT contain code that pertains to other objects or game-global data.
  */
-export default class Player extends GameObjectController {
+export default class Player extends Base {
   /**
    * @prop {number} bodyOffsetX Horizontal offset of the physical bounding box relative to the sprite
    */

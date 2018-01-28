@@ -3,7 +3,9 @@ import fs from 'fs';
 import _ from 'lodash';
 import Phaser from 'phaser';
 import flod from '../flod';
-import Player from './goc/player';
+
+import goc from './goc';
+import Room from './room';
 
 export default class Game extends Phaser.Game {
   /**
@@ -46,6 +48,16 @@ class RootScene extends Phaser.Scene {
   }
   preload() {
     const { projectPath } = this;
+
+    this.load.json(
+      'goc_assets',
+      path.join(projectPath, 'goc_assets.json')
+    );
+
+    this.load.json(
+      'goc_properties',
+      path.join(projectPath, 'goc_properties.json')
+    );
 
     const AN = path.join(projectPath, 'an');
     [
@@ -117,6 +129,7 @@ class RootScene extends Phaser.Scene {
   create() {
     setTimeout(() => {
       this
+        .setupRooms()
         .setupFrameSounds()
         .setupGroups()
         .setupTilemaps()
@@ -125,6 +138,13 @@ class RootScene extends Phaser.Scene {
         .setupCamera()
         .setupInputs();
     }, 3000);
+  }
+
+  setupRooms() {
+    const assets = this.cache.json.get('goc_assets');
+    const properties = this.cache.json.get('goc_properties');
+    this.manifest = Room.createManifest(goc, assets, properties);
+    return this;
   }
   
   /**
@@ -170,7 +190,7 @@ class RootScene extends Phaser.Scene {
   }
   
   setupPlayer() {
-    this.player = new Player(this, 100,100);
+    this.player = new goc.Player(this, 100,100);
     return this;
   }
   

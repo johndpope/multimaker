@@ -1,0 +1,24 @@
+{
+  "Room": {
+    "an": [],
+    "so": [],
+    "sp": []
+  },
+  "Player": {
+    "an": [
+      "player",
+      "player_bullet"
+    ],
+    "so": [
+      "footstep",
+      "jump",
+      "land",
+      "player_bullet",
+      "player_bullet_impact"
+    ],
+    "sp": [
+      "player",
+      "player_bullet"
+    ]
+  }
+}

@@ -3,7 +3,7 @@
         {
          "color":"#00aa00",
          "draworder":"topdown",
-         "name":"maps",
+         "name":"Rooms",
          "objects":[
                 {
                  "height":224,
@@ -21,8 +21,29 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"o0",
+         "objects":[
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Player",
+                 "visible":true,
+                 "width":0,
+                 "x":944,
+                 "y":464
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":3,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",
