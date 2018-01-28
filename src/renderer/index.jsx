@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+const React = require('react');
+const ReactDOM = require('react-dom');
+const { AppContainer } = require('react-hot-loader');
 
 // FIXME: These should available already
 window.WEBGL_RENDERER = true;

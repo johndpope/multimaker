@@ -1,16 +1,21 @@
 // @ts-check
 
-import { app, BrowserWindow } from 'electron'
-import { enableLiveReload } from 'electron-compile'
 import url from 'url'
 import path from 'path'
+import { app, BrowserWindow } from 'electron'
+import { enableLiveReload } from 'electron-compile'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 let mainWindow
 
 function createMainWindow() {
-  enableLiveReload()
+  if (isDevelopment) {
+    BrowserWindow.addDevToolsExtension(
+      // TODO: Generalize this so it works on other hosts and with other users
+      "C:\\Users\\brad\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\2.5.2_0"
+    );
+  }
   mainWindow = new BrowserWindow({
     width: 800,
     height: 550,
@@ -18,7 +23,8 @@ function createMainWindow() {
   })
   
   if (isDevelopment) {
-    mainWindow.webContents.openDevTools({ mode: "detach" })
+    mainWindow.webContents.openDevTools({ mode: "undocked" })
+    enableLiveReload()
   }
   
   mainWindow.loadURL(url.format({

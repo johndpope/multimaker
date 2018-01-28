@@ -1,0 +1,36 @@
+@import 'variables';
+@import 'root-game';
+@import 'root-editor';
+
+body {
+  background-color: $main-color-bg;
+  color: $main-color-fg;
+
+  body,
+  html {
+    height: 100%;
+    width: 100%;
+  }
+
+  &,
+  :not(script) {
+    border: 0;
+    box-sizing: border-box;
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    background-color: transparent;
+  }
+}
+
+.root {
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

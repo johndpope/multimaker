@@ -1,0 +1,10 @@
+.root {
+  &.root-game {
+    canvas {
+      display: block;
+      height: 100%;
+      margin: auto;
+      width: auto;
+    }
+  }
+}

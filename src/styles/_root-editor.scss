@@ -1,0 +1,16 @@
+.root {
+  &.root-editor {
+    .panel {
+      background-color: $panel-color-bg;
+      border: $panel-border;
+      padding: $panel-padding;
+    }
+
+    .toolbar {
+      display: block;
+      left: $toolbar-x;
+      position: absolute;
+      top: $toolbar-y;
+    }
+  }
+}
