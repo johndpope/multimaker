@@ -7,6 +7,11 @@ import { enableLiveReload } from 'electron-compile'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
+if (!process.argv[2]) {
+  console.error('No project specified')
+  process.exit(1)
+}
+
 let mainWindow
 
 function createMainWindow() {

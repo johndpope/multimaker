@@ -7,9 +7,10 @@ import Player from './goc/player';
 
 export default class Game extends Phaser.Game {
   /**
-   * @param {HTMLElement} parent 
+   * @param {string} projectPath Absolute path to the project to be opened
+   * @param {HTMLElement} parent HTML element into which the Phaser canvas will be inserted
    */
-  constructor(parent) {
+  constructor(projectPath, parent) {
     super({
       parent,
       type: Phaser.WEBGL,
@@ -26,46 +27,52 @@ export default class Game extends Phaser.Game {
           }
         }
       },
-      scene: new RootScene()
+      scene: new RootScene(projectPath)
     });
   }
 }
   
 class RootScene extends Phaser.Scene {
+  /**
+   * @param {string} projectPath Absolute path to the project to be opened
+   */
+  constructor(projectPath) {
+    super();
+    this.projectPath = projectPath;
+  }
   init() {
     // DEBUG: Expose scene globally
     window.scene = this;
   }
   preload() {
-    const AS = path.join(__dirname, '..', '..', '..', 'assets', 'projects', 'antispace');
-
-    const AS_SP = path.join(AS, 'sprites');
+    const { projectPath } = this;
+    const SP = path.join(projectPath, 'sprites');
     [
       'charles',
       'laser'
     ].forEach(spr => {
       this.load.atlas(
         spr,
-        path.join(AS_SP, `${spr}.png`),
-        path.join(AS_SP, `${spr}.json`)
+        path.join(SP, `${spr}.png`),
+        path.join(SP, `${spr}.json`)
       );
     });
     
-    const AS_AN = path.join(AS, 'animations');
+    const AN = path.join(projectPath, 'animations');
     [
       'charlesAnim',
       'laserAnim'
     ].forEach(anim => {
-      this.load.animation(anim, path.join(AS_AN, `${anim}.json`));
+      this.load.animation(anim, path.join(AN, `${anim}.json`));
     });
     
-    const AS_TS = path.join(AS, 'tiles');
-    this.load.image('tileset00', path.join(AS_TS, 'tsNAZ.png'));
+    const TS = path.join(projectPath, 'tiles');
+    this.load.image('tileset00', path.join(TS, 'tsNAZ.png'));
     
-    const AS_TM = path.join(AS, 'maps');
-    this.load.tilemapTiledJSON('room000', path.join(AS_TM, 'room000.json'));
+    const TM = path.join(projectPath, 'maps');
+    this.load.tilemapTiledJSON('room000', path.join(TM, 'room000.json'));
 
-    const AS_SO = path.join(AS, 'sounds');
+    const SO = path.join(projectPath, 'sounds');
     [
       'chink',
       'crunch',
@@ -75,11 +82,11 @@ class RootScene extends Phaser.Scene {
       'pew',
     ].forEach(snd => {
       // TODO: Upgrade to .ogg
-      this.load.audio(snd, path.join(AS_SO, `${snd}.wav`));
+      this.load.audio(snd, path.join(SO, `${snd}.wav`));
     });
 
-    // const AS_MU = path.join(AS, 'music');
-    // this.load.binary('nazXm', path.join(AS_MU, 'naz.xm'));
+    // const MU = path.join(projectPath, 'music');
+    // this.load.binary('nazXm', path.join(MU, 'naz.xm'));
   }
   create() {
     setTimeout(() => {
