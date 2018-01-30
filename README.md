@@ -79,13 +79,16 @@ Code that governs what happens in the game part of the application apart from th
 ###### `./src/renderer/game/index.js`
 This might be described as the entry point for the game, which is loaded by rendering thread at the same time as the editor overlay.
 
+###### `./src/renderer/game/actors/`
+Contains the different actor types. All actor types must be exported from the `index.js` in order to be usable from map files.
+
 ##### `./src/renderer/index.js`
 The entry point for the Electron rendering thread.
 
 ##### `./src/renderer/style.css`
 Main stylesheet for index.html. At some point this file should probably be split up into smaller components.
 
-## Development Guidelines
+## Project Structure
 
 ### Rooms and Actors
 This engine uses a mechanism to organize controller logic based on the idea of "Rooms" and "Actors". This concept runs parallel with Phaser's own concept of "Scenes" and "GameObjects," but is distinct from them.

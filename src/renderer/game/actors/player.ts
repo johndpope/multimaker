@@ -7,141 +7,85 @@ import PlayerBullet from './player-bullet';
  * Controls the player object.
  */
 export default class Player extends Actor {
-  /**
-   * Horizontal offset of the physical bounding box relative to the sprite
-   */
+  /** Horizontal offset of the physical bounding box relative to the sprite */
   bodyOffsetX: number;
 
-  /**
-   * Vertical offset of the physical bounding box relative to the sprite
-   */
+  /** Vertical offset of the physical bounding box relative to the sprite */
   bodyOffsetY: number;
 
-  /**
-   * of player when standing
-   */
+  /** of player when standing */
   bodyHStand: number;
 
-  /**
-   * of player when crawling
-   */
+  /** of player when crawling */
   bodyHCrawl: number;
 
-  /**
-   * player at all times
-   */
+  /** player at all times */
   bodyW: number;
 
-  /**
-   * Maximum walking velocity on the ground
-   */
+  /** Maximum walking velocity on the ground */
   walkSpeedMax: number;
 
-  /**
-   * Rate of accelleration when walking
-   */
+  /** Rate of accelleration when walking */
   walkAccel: number;
 
-  /**
-   * at which jump power builds while crouching
-   */
+  /** at which jump power builds while crouching */
   jumpPowerInc: number;
 
-  /**
-   * Maxumim allowed jump power
-   */
+  /** Maxumim allowed jump power */
   jumpPowerMax: number;
 
-  /**
-   * Amount by which horizontal speed increases when leaping
-   */
+  /** Amount by which horizontal speed increases when leaping */
   leapAccel: number;
 
-  /**
-   * Maximum horizontal speed achieveable from leaping
-   */
+  /** Maximum horizontal speed achieveable from leaping */
   leapMax: number;
 
-  /**
-   * Factor by which horizontal speed is scaled while crouching or sliding
-   */
+  /** Factor by which horizontal speed is scaled while crouching or sliding */
   slideFactor: number;
 
-  /**
-   * Speed under which sliding stops
-   */
+  /** Speed under which sliding stops */
   slideBreak: number;
   
-  /**
-   * at which the player crawls
-   */
+  /** at which the player crawls */
   crawlSpeed: number;
   
-  /**
-   * Facing direction (0 = left, 1 = right)
-   */
+  /** Facing direction (0 = left, 1 = right) */
   facing: number;
   
-  /**
-   * Current amount of power built up for jump
-   */
+  /** Current amount of power built up for jump */
   jumpPower: number;
   
-  /**
-   * Whether the player is currently crawling
-   */
+  /** Whether the player is currently crawling */
   isDucking: boolean;
   
-  /**
-   * Whether the player is currently sliding
-   */
-
+  /** Whether the player is currently sliding */
   isSliding: boolean;
   
-  /**
-   * Amount of energy available for firing
-   */
-
+  /** Amount of energy available for firing */
   firePower: number;
   
-  /**
-   * Maximum amount of fire power
-   */
+  /** Maximum amount of fire power */
   firePowerMax: number;
 
-  /**
-   * Rate at which fire power is recovered
-   */
+  /** Rate at which fire power is recovered */
   firePowerRecovery: number;
 
-  /**
-   * Amount of fire power required to fire
-   */
+  /** Amount of fire power required to fire */
   firePowerCost: number;
 
-  /**
-   * Projectile X offset from player position when facing left
-   */
+  /** Projectile X offset from player position when facing left */
   fireOffsetXLeft: number;
 
-  /**
-   * Projectile X offset from player position when facing right
-   */
+  /** Projectile X offset from player position when facing right */
   fireOffsetXRight: number;
 
-  /**
-   * Projectile Y offset from player position
-   */
+  /** Projectile Y offset from player position */
   fireOffsetY: number;
 
-  /**
-   * Maximum speed at which the player is allowed to fall.
-   */
+  /** Maximum speed at which the player is allowed to fall. */
   maxFallSpeed: number;
 
-  /**
-   * Whether we were on the floor in the previous update
-   */
+  /** Whether we were on the floor in the previous update */
   prevOnFloor: boolean;
 
   inputs: {
@@ -207,6 +151,7 @@ export default class Player extends Actor {
         manager: { scene }
       }
     } = this;
+    // TODO: This will break for rooms that don't have tiles (like the master room)
     scene.physics.add.collider(main, layers[0]);
     body.allowGravity = true;
   }

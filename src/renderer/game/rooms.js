@@ -92,12 +92,14 @@ export class RoomManager {
    * Create and populate a room if it is not already present.
    * 
    * @param {string} key Key of tilemap on which room is based.
+   * @param {number} x X offset for all content in the room
+   * @param {number} y Y offset for all content in the room
    */
-  load(key) {
+  load(key, x=0, y=0) {
     if (key in this.rooms) {
       return this.rooms[key];
     }
-    return this.rooms[key] = new Room(this, key)
+    return this.rooms[key] = new Room(this, key, x, y)
   }
 }
 
@@ -171,15 +173,28 @@ export class Room {
       }
     })
   }
-  setupImageLayer({image, x, y, properties: {scrollFactorX, scrollFactorY}}) {
+  setupImageLayer({image, x, y, properties }) {
     const key = path.basename(image, path.extname(image));
     const {
       x: ox,
       y: oy,
       images,
-      manager: { scene }
+      manager: { scene },
+      tilemap: {
+        widthInPixels,
+        heightInPixels
+      }
     } = this;
-    const obj = scene.add.image(ox + x, oy + y, key);
+    const obj = scene.add.tileSprite(
+      ox + x,
+      oy + y,
+      widthInPixels,
+      heightInPixels,
+      key
+    );
+    const { originX, originY, scrollFactorX, scrollFactorY } = properties;
+    obj.originX = parseFloat(originX || 0);
+    obj.originY = parseFloat(originY || 0);
     obj.scrollFactorX = parseFloat(scrollFactorX || 0);
     obj.scrollFactorY = parseFloat(scrollFactorY || 0);
     images.push(obj);

@@ -126,7 +126,6 @@ class RootScene extends Phaser.Scene {
     [
       'area_0'
     ].forEach(ts => {
-
       this.load.image(ts, path.join(TS, `${ts}.png`));
     });
   }
@@ -145,8 +144,16 @@ class RootScene extends Phaser.Scene {
     const assets = this.cache.json.get('actor_assets');
     const properties = this.cache.json.get('actor_properties');
     this.rooms = new RoomManager(this, actors, assets, properties);
+    // TODO: Load the master room instead of an arbitrary area
     this.area_0_0 = this.rooms.load('area_0_0');
     this.player = this.area_0_0.actors.find(g => g instanceof actors.Player);
+    this.cameras.main.startFollow(this.player.gameObjects.main);
+    this.cameras.main.setBounds(
+      this.area_0_0.x,
+      this.area_0_0.y,
+      this.area_0_0.tilemap.widthInPixels,
+      this.area_0_0.tilemap.heightInPixels
+    )
     return this;
   }
   
