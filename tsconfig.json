@@ -1,3 +1,10 @@
 {
-  "extends": "./node_modules/electron-webpack/tsconfig-base.json"
+  "experimentalDecorators": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "target": "es6",
+    "checkJs": true,
+    
+  }
 }

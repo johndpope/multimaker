@@ -1,19 +1,46 @@
-{ "height":100,
+{ "height":1000,
  "layers":[
         {
          "color":"#00aa00",
          "draworder":"topdown",
-         "name":"Rooms",
+         "name":"RoomBoundary",
          "objects":[
                 {
                  "height":224,
                  "id":1,
                  "name":"",
+                 "properties":
+                    {
+                     "key":"area_0_0"
+                    },
+                 "propertytypes":
+                    {
+                     "key":"string"
+                    },
                  "rotation":0,
-                 "type":"",
+                 "type":"RoomBoundary",
                  "visible":true,
                  "width":800,
                  "x":800,
+                 "y":448
+                }, 
+                {
+                 "height":224,
+                 "id":4,
+                 "name":"",
+                 "properties":
+                    {
+                     "key":"area_0_1"
+                    },
+                 "propertytypes":
+                    {
+                     "key":"string"
+                    },
+                 "rotation":0,
+                 "type":"RoomBoundary",
+                 "visible":true,
+                 "width":400,
+                 "x":1600,
                  "y":448
                 }],
          "opacity":1,
@@ -43,7 +70,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":4,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",
@@ -52,5 +79,5 @@
  "tilewidth":16,
  "type":"map",
  "version":1,
- "width":100
+ "width":1000
 }

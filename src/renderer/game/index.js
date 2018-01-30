@@ -1,11 +1,13 @@
-import path from 'path';
-import fs from 'fs';
+// @ts-check
+import * as path from 'path';
+import * as fs from 'fs';
 import _ from 'lodash';
 import Phaser from 'phaser';
+import Scene from 'phaser/src/scene/Scene';
 import flod from '../flod';
 
-import goc from './goc';
-import Room from './room';
+import actors from './actors';
+import { RoomManager } from './rooms';
 
 export default class Game extends Phaser.Game {
   /**
@@ -50,13 +52,13 @@ class RootScene extends Phaser.Scene {
     const { projectPath } = this;
 
     this.load.json(
-      'goc_assets',
-      path.join(projectPath, 'goc_assets.json')
+      'actor_assets',
+      path.join(projectPath, 'actor_assets.json')
     );
 
     this.load.json(
-      'goc_properties',
-      path.join(projectPath, 'goc_properties.json')
+      'actor_properties',
+      path.join(projectPath, 'actor_properties.json')
     );
 
     const AN = path.join(projectPath, 'an');
@@ -112,7 +114,9 @@ class RootScene extends Phaser.Scene {
 
     const TM = path.join(projectPath, 'tm');
     [
-      'area_0_0'
+      'master',
+      'area_0_0',
+      'area_0_1'
     ].forEach(tm => {
 
       this.load.tilemapTiledJSON(tm, path.join(TM, `${tm}.json`));
@@ -129,21 +133,20 @@ class RootScene extends Phaser.Scene {
   create() {
     setTimeout(() => {
       this
-        .setupRooms()
         .setupFrameSounds()
         .setupGroups()
-        .setupTilemaps()
-        .setupPlayer()
-        .setupCollisions()
+        .setupRooms()
         .setupCamera()
         .setupInputs();
     }, 3000);
   }
 
   setupRooms() {
-    const assets = this.cache.json.get('goc_assets');
-    const properties = this.cache.json.get('goc_properties');
-    this.manifest = Room.createManifest(goc, assets, properties);
+    const assets = this.cache.json.get('actor_assets');
+    const properties = this.cache.json.get('actor_properties');
+    this.rooms = new RoomManager(this, actors, assets, properties);
+    this.area_0_0 = this.rooms.load('area_0_0');
+    this.player = this.area_0_0.actors.find(g => g instanceof actors.Player);
     return this;
   }
   
@@ -168,46 +171,15 @@ class RootScene extends Phaser.Scene {
   
   setupGroups() {
     this.groups = {
+      boundary: this.add.group(),
       player: this.add.group(),
       bullet: this.add.group()
     };
     return this;
   }
 
-  setupTilemaps() {
-    flod.load(this.cache.binary.get('area_0')).play();
-    
-    // TODO: Allow loading various tilemaps
-    // TODO: Allow the tilemap to determine ALL level content
-    this.tilemap = this.add.tilemap('area_0_0');
-    // TODO: Load tilesets based on tilemap data
-    this.tileset = this.tilemap.addTilesetImage('area_0');
-    // TODO: Allow multiple tilemap layers
-    this.tilemapLayer =
-      this.tilemap.createStaticLayer(0, this.tileset, 0, 0);
-    this.tilemapLayer.setCollisionBetween(64, 128);
-    return this;
-  }
-  
-  setupPlayer() {
-    this.player = new goc.Player(this, 100,100);
-    return this;
-  }
-  
-  setupCollisions() {
-    this.physics.add.collider(this.player.main, this.tilemapLayer);
-    return this;
-  }
-
   setupCamera() {
     this.cameras.main.setRoundPixels(true);
-    this.cameras.main.setBounds(
-      0,
-      0,
-      this.tilemap.widthInPixels,
-      this.tilemap.heightInPixels
-    );
-    this.cameras.main.startFollow(this.player.main);
     return this;
   }
 
@@ -226,10 +198,14 @@ class RootScene extends Phaser.Scene {
   }
 
   update() {
+    if (!this.area_0_0) {
+      return;
+    }
+    this.area_0_0.update();
     if (!this.player) {
       return;
     }
-    this.player.update(this.getInputs());
+    this.player.inputs = this.getInputs();
   }
 
   getInputs() {

@@ -1,0 +1,170 @@
+[
+    {
+        "color": "#ffff0000",
+        "name": "Player",
+        "properties": [
+            {
+                "name": "bodyHCrawl",
+                "type": "float",
+                "value": 6
+            },
+            {
+                "name": "bodyHStand",
+                "type": "float",
+                "value": 14
+            },
+            {
+                "name": "bodyOffsetX",
+                "type": "float",
+                "value": 4
+            },
+            {
+                "name": "bodyOffsetY",
+                "type": "float",
+                "value": 2
+            },
+            {
+                "name": "bodyW",
+                "type": "float",
+                "value": 8
+            },
+            {
+                "name": "crawlSpeed",
+                "type": "float",
+                "value": 30
+            },
+            {
+                "name": "facing",
+                "type": "int",
+                "value": 1
+            },
+            {
+                "name": "fireOffsetXLeft",
+                "type": "float",
+                "value": -16
+            },
+            {
+                "name": "fireOffsetXRight",
+                "type": "float",
+                "value": 8
+            },
+            {
+                "name": "fireOffsetY",
+                "type": "float",
+                "value": 6
+            },
+            {
+                "name": "firePowerCost",
+                "type": "float",
+                "value": 30
+            },
+            {
+                "name": "firePowerMax",
+                "type": "float",
+                "value": 30
+            },
+            {
+                "name": "firePowerRecovery",
+                "type": "float",
+                "value": 2
+            },
+            {
+                "name": "jumpPowerInc",
+                "type": "float",
+                "value": 8
+            },
+            {
+                "name": "jumpPowerMax",
+                "type": "float",
+                "value": 180
+            },
+            {
+                "name": "leapAccel",
+                "type": "float",
+                "value": 40
+            },
+            {
+                "name": "leapMax",
+                "type": "float",
+                "value": 120
+            },
+            {
+                "name": "maxFallSpeed",
+                "type": "float",
+                "value": 300
+            },
+            {
+                "name": "slideBreak",
+                "type": "float",
+                "value": 10
+            },
+            {
+                "name": "slideFactor",
+                "type": "float",
+                "value": 0.97
+            },
+            {
+                "name": "walkAccel",
+                "type": "float",
+                "value": 10
+            },
+            {
+                "name": "walkSpeedMax",
+                "type": "float",
+                "value": 90
+            }
+        ]
+    },
+    {
+      "color": "#ffff3300",
+      "name": "PlayerBullet",
+      "properties": [
+        {
+          "name": "speed",
+          "type": "float",
+          "value": 920
+        },
+        {
+          "name": "ttl",
+          "type": "int",
+          "value": 60
+        },
+        {
+          "name": "bodyW",
+          "type": "float",
+          "value": 24
+        },
+        {
+          "name": "bodyH",
+          "type": "float",
+          "value": 1
+        },
+        {
+          "name": "originX",
+          "type": "float",
+          "value": 0.5
+        },
+        {
+          "name": "originY",
+          "type": "float",
+          "value": 0.5
+        },
+        {
+          "name": "facing",
+          "type": "int",
+          "value": 1
+        }
+      ]
+    },
+    {
+        "color": "#ff00aa00",
+        "name": "RoomBoundary",
+        "properties": [
+            {
+                "name": "key",
+                "type": "string",
+                "value": ""
+            }
+        ]
+    }
+]
