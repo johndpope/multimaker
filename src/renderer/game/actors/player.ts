@@ -88,6 +88,23 @@ export default class Player extends Actor {
   /** Whether we were on the floor in the previous update */
   prevOnFloor: boolean;
 
+  /** Amount of power available to AGF */
+  agfPower: number;
+
+  /** Maximum power available to AGF */
+  agfPowerMax: number;
+
+  /** Whether AGF is currently active */
+  agfIsActive: boolean;
+
+  /** Scale factor applied to X velocity while AGF is active */
+  agfScaleX: number;
+
+  /** Scale factor applied to X velocity while AGF is active */
+  agfScaleY: number;
+
+  flicker: boolean;
+
   inputs: {
     left: boolean;
     right: boolean;
@@ -138,6 +155,8 @@ export default class Player extends Actor {
     this.prevOnFloor = false;
     this.isSliding = false;
     this.isDucking = false;
+    this.agfIsActive = false;
+    this.agfPower = this.agfPowerMax;
   }
 
   onRoomLoad() {
@@ -161,6 +180,7 @@ export default class Player extends Actor {
   }
 
   update() {
+    this.flicker = !this.flicker;
     this.updateInput();
     this.updateFirePower();
     this.updateSlide();
@@ -186,9 +206,17 @@ export default class Player extends Actor {
       this.fire();
     }
 
+    this.gameObjects.main.body.allowGravity = true;
     if (!body.onFloor()) {
+      if (inputs.jump && this.agfPower > 0) {
+        this.gameObjects.main.body.allowGravity = false;
+        this.gameObjects.main.body.setVelocityX(this.gameObjects.main.body.velocity.x * this.agfScaleX);
+        this.gameObjects.main.body.setVelocityY(this.gameObjects.main.body.velocity.y * this.agfScaleY);
+        this.agfPower -= 1;
+      }
       return this;
     }
+    this.agfPower = this.agfPowerMax;
     
     if (inputs.down) {
       if (!this.isDucking && vx !== 0) {
@@ -284,11 +312,11 @@ export default class Player extends Actor {
     const {
       gameObjects: { main: { body } },
       bodyW, bodyHStand, bodyHCrawl, bodyOffsetX, bodyOffsetY,
-      isDucking
+      isDucking,
+      flicker
     } = this;
     body.width = bodyW;
-    const correctHeight = isDucking ? bodyHCrawl : bodyHStand;
-    const deltaHeight = body.height - correctHeight;
+    const correctHeight = (isDucking ? bodyHCrawl : bodyHStand);
     body.height = correctHeight;
     body.setOffset(
       bodyOffsetX,
@@ -302,16 +330,20 @@ export default class Player extends Actor {
         main,
         main: {
           body,
-          body: { velocity: {
-            x: vx,
-            y: vy
-          } }
+          body: {
+            velocity: {
+              x: vx,
+              y: vy
+            },
+            allowGravity
+          }
         }
       },
       isSliding,
       isDucking,
       isCrouching,
       facing,
+      flicker
     } = this;
     const anim =
       (body.onFloor()) ?
@@ -333,6 +365,8 @@ export default class Player extends Actor {
       main.play(anim);
     }
     main.flipX = !facing;
+    main.tint = (!allowGravity) ? (flicker ? 0x00ff88 : 0x88ffff) : 0xffffff;
+    main.blendMode = (!allowGravity && flicker) ? 1 : 0;
     return this;
   }
   fire() {

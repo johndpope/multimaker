@@ -25,7 +25,7 @@ export default class Game extends Phaser.Game {
         // @todo: Switch to 'matter' so we can use sloped tiles
         default: 'arcade',
         arcade: {
-          // debug: true,
+          debug: true,
           gravity: {
             y: 450
           }

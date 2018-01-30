@@ -112,6 +112,21 @@
                 "name": "walkSpeedMax",
                 "type": "float",
                 "value": 90
+            },
+            {
+                "name": "agfPowerMax",
+                "type": "float",
+                "value": 120
+            },
+            {
+                "name": "agfScaleX",
+                "type": "float",
+                "value": 1.0
+            },
+            {
+                "name": "agfScaleY",
+                "type": "float",
+                "value": 0.98
             }
         ]
     },
