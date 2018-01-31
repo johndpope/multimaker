@@ -14,7 +14,8 @@
       "jump",
       "land",
       "player_bullet",
-      "player_bullet_impact"
+      "player_bullet_impact",
+      "float"
     ],
     "sp": [
       "player",

@@ -1,12 +1,12 @@
 // @ts-check
 import * as path from 'path';
 import * as fs from 'fs';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import Phaser from 'phaser';
 import Scene from 'phaser/src/scene/Scene';
-import flod from '../flod';
+import flod from '../flod/index';
 
-import actors from './actors';
+import actors from './actors/index';
 import { RoomManager } from './rooms';
 
 export default class Game extends Phaser.Game {
@@ -95,6 +95,7 @@ class RootScene extends Phaser.Scene {
       'land',
       'player_bullet_impact',
       'player_bullet',
+      'float'
     ].forEach(snd => {
       // TODO: Upgrade to .ogg
       this.load.audio(snd, path.join(SO, `${snd}.wav`));

@@ -105,6 +105,9 @@ export default class Player extends Actor {
 
   flicker: boolean;
 
+  /** Sound effect instance used to play the float sound effect */
+  floatSound: any;
+
   inputs: {
     left: boolean;
     right: boolean;
@@ -367,6 +370,16 @@ export default class Player extends Actor {
     main.flipX = !facing;
     main.tint = (!allowGravity) ? (flicker ? 0x00ff88 : 0x88ffff) : 0xffffff;
     main.blendMode = (!allowGravity && flicker) ? 1 : 0;
+    if (!allowGravity) {
+      if (!this.floatSound) {
+        this.floatSound = this.room.manager.scene.sound.play('float');
+      }
+    } else {
+      if (this.floatSound) {
+        this.floatSound.stop();
+        this.floatSound = null;
+      }
+    }
     return this;
   }
   fire() {
