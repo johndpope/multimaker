@@ -372,7 +372,8 @@ export default class Player extends Actor {
     main.blendMode = (!allowGravity && flicker) ? 1 : 0;
     if (!allowGravity) {
       if (!this.floatSound) {
-        this.floatSound = this.room.manager.scene.sound.play('float');
+        this.floatSound = this.room.manager.scene.sound.add('float');
+        this.floatSound.play();
       }
     } else {
       if (this.floatSound) {
