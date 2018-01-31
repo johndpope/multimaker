@@ -2,8 +2,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import * as _ from 'lodash';
-import Phaser from 'phaser';
-import Scene from 'phaser/src/scene/Scene';
+import Phaser from 'phaser/dist/phaser';
 import flod from '../flod/index';
 
 import actors from './actors/index';

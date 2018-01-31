@@ -1,5 +1,5 @@
 // @ts-check
-import Phaser from 'phaser';
+import Phaser from 'phaser/dist/phaser';
 import Actor from '../actor';
 import PlayerBullet from './player-bullet';
 

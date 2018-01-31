@@ -1,7 +1,7 @@
 // @ts-check
 import * as path from 'path';
 import * as _ from 'lodash';
-import Phaser from 'phaser';
+import Phaser from 'phaser/dist/phaser';
 import Actor, { ActorClass } from './actor';
 
 /**

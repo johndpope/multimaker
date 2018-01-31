@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser/dist/phaser';
 import Actor from '../actor';
 
 export default class PlayerBullet extends Actor {
