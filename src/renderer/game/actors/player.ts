@@ -368,8 +368,7 @@ export default class Player extends Actor {
       main.play(anim);
     }
     main.flipX = !facing;
-    main.tint = (!allowGravity) ? (flicker ? 0x00ff88 : 0x88ffff) : 0xffffff;
-    main.blendMode = (!allowGravity && flicker) ? 1 : 0;
+    main.blendMode = (!allowGravity) ? 1 : 0;
     if (!allowGravity) {
       if (!this.floatSound) {
         this.floatSound = this.room.manager.scene.sound.add('float');

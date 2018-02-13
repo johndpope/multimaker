@@ -116,7 +116,7 @@
             {
                 "name": "agfPowerMax",
                 "type": "float",
-                "value": 120
+                "value": 60
             },
             {
                 "name": "agfScaleX",
@@ -126,7 +126,7 @@
             {
                 "name": "agfScaleY",
                 "type": "float",
-                "value": 0.98
+                "value": 1.0
             }
         ]
     },
