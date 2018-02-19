@@ -25,6 +25,10 @@ function createMainWindow() {
     width: 800,
     height: 550,
     autoHideMenuBar: true,
+    backgroundColor: '#000000',
+    webPreferences: {
+      experimentalFeatures: true
+    }
   })
   
   if (isDevelopment) {

@@ -1,18 +1,38 @@
 .root {
   &.root-editor {
     .panel {
+      backdrop-filter: $panel-backdrop-filter;
       background-color: $panel-color-bg;
-      border: $panel-border;
       border-radius: $panel-border-radius;
+      border: $panel-border;
+      box-shadow: $main-box-shadow;
+      mix-blend-mode: $panel-blend-mode;
+      opacity: $panel-opacity;
+      overflow: hidden;
       padding: $panel-padding;
+      transition-property: box-shadow;
+      
+      &:not(:hover) {
+        box-shadow: $main-box-shadow-hidden;
+      }
     }
 
     .toolbar {
-      box-shadow: $main-box-shadow;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
       display: block;
       left: $toolbar-x;
       position: absolute;
       top: $toolbar-y;
+      transition-property: left, box-shadow;
+      padding: 0;
+
+      &:not(:hover) {
+        left: $toolbar-x-closed;
+        transition-delay: $toolbar-transition-delay-close;
+        transition-duration: $toolbar-transition-duration-close;
+        transition-timing-function: $toolbar-transition-timing-function-close;
+      }
 
       .btn {
         background-color: $toolbar-btn-bg-color;
@@ -20,14 +40,25 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        border-radius: $toolbar-btn-border-radius;
+        border-left: 0;
         display: block;
         height: $toolbar-btn-h;
         padding: $toolbar-btn-padding;
+        transition-property: $toolbar-transition-property;
         width: $toolbar-btn-w;
+        
+        @at-root .root.root-editor .panel.toolbar:not(:hover) .btn {
+          border-top-color: $toolbar-btn-border-color-hidden;
+          transition-delay: $toolbar-transition-delay-close;
+          transition-duration: $toolbar-transition-duration-close;
+          transition-timing-function: $toolbar-transition-timing-function-close;
+        }
 
         &:not(:first-child) {
-          margin-top: $panel-padding;
+          border-top-left-radius: 0;
+          border-top-color: $toolbar-btn-border-color;
+          border-top-style: $toolbar-btn-border-style;
+          border-top-width: $toolbar-btn-border-width;
         }
 
         &.btn-draw {

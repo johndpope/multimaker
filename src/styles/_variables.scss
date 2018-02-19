@@ -1,16 +1,38 @@
 $main-color-bg: #000;
 $main-color-fg: #ddd;
-$main-box-shadow: 1vh 1vh 0 rgba(0, 0, 0, .5);
+$main-box-shadow:
+  0 0 0 .25vh #fff,
+  0 0 0 .5vh #000,
+  1.5vh 1.5vh 0 0 rgba(0,0,0,.5)
+  ;
+$main-box-shadow-hidden:
+  0 0 0 .25vh #000,
+  0 0 0 .5vh #000,
+  1.5vh 1.5vh 0 0 rgba(0,0,0,.5)
+  ;
+$main-transition-duration: 250ms;
+$main-transition-timing-function: ease-in-out;
 
 $panel-color-bg: rgba(30, 30, 30, 1);
 $panel-border: 0;
-$panel-padding: .5vh;
+$panel-padding: 1vh;
 $panel-border-radius: 1.5vh;
+$panel-blend-mode: luminosity;
+$panel-backdrop-filter: blur(.8vh);
+$panel-opacity: .9;
 
-$toolbar-x: 2vh;
+$toolbar-x: 0;
+$toolbar-x-closed: -6vh;
 $toolbar-y: 15vh;
-$toolbar-btn-w: 6vh;
-$toolbar-btn-h: 6vh;
+$toolbar-btn-w: 7vh;
+$toolbar-btn-h: 7vh;
 $toolbar-btn-padding: 1vh;
-$toolbar-btn-border-radius: 1vh;
-$toolbar-btn-bg-color: rgba(255, 255, 255, .1);
+$toolbar-btn-border-color: #fff;
+$toolbar-btn-border-color-hidden: #000;
+$toolbar-btn-border-width: .25vh;
+$toolbar-btn-border-style: solid;
+$toolbar-btn-bg-color: transparent;
+$toolbar-transition-property: border-color;
+$toolbar-transition-duration-close: 750ms;
+$toolbar-transition-delay-close: 0;
+$toolbar-transition-timing-function-close: ease-in;
