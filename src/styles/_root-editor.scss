@@ -22,10 +22,10 @@
       border-top-left-radius: 0;
       display: block;
       left: $toolbar-x;
+      padding: 0;
       position: absolute;
       top: $toolbar-y;
       transition-property: left, box-shadow;
-      padding: 0;
 
       &:not(:hover) {
         left: $toolbar-x-closed;
@@ -35,11 +35,6 @@
       }
 
       .btn {
-        background-color: $toolbar-btn-bg-color;
-        background-origin: content-box;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
         border-left: 0;
         display: block;
         height: $toolbar-btn-h;
@@ -47,22 +42,42 @@
         transition-property: $toolbar-transition-property;
         width: $toolbar-btn-w;
         
-        @at-root .root.root-editor .panel.toolbar:not(:hover) .btn {
-          border-top-color: $toolbar-btn-border-color-hidden;
-          transition-delay: $toolbar-transition-delay-close;
-          transition-duration: $toolbar-transition-duration-close;
-          transition-timing-function: $toolbar-transition-timing-function-close;
-        }
-
         &:not(:first-child) {
-          border-top-left-radius: 0;
           border-top-color: $toolbar-btn-border-color;
+          border-top-left-radius: 0;
           border-top-style: $toolbar-btn-border-style;
           border-top-width: $toolbar-btn-border-width;
         }
+        
+        @at-root .root.root-editor .panel.toolbar:not(:hover) .btn {
+          border-top-color: $toolbar-btn-border-color-hidden;
+          &,
+          &::before {
+            transition-delay: $toolbar-transition-delay-close;
+            transition-duration: $toolbar-transition-duration-close;
+            transition-timing-function: $toolbar-transition-timing-function-close;
+          }
+          &::before {
+            background-color: $toolbar-btn-bg-color-hidden;
+          }
+        }
 
-        &.btn-draw {
-          background-image: url('../../assets/editor/pencil.svg');
+        &::before {
+          -webkit-mask-image: url('../../assets/editor/none.svg');
+          -webkit-mask-origin: content-box;
+          -webkit-mask-position: center;
+          -webkit-mask-repeat: no-repeat;
+          -webkit-mask-size: contain;
+          background-color: $toolbar-btn-bg-color;
+          content: ' ';
+          display: block;
+          height: 100%;
+          transition-property: $toolbar-transition-property;
+          width: 100%;
+        }
+
+        &.btn-draw::before {
+          -webkit-mask-image: url('../../assets/editor/pencil.svg');
         }
       }
     }

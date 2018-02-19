@@ -10,6 +10,7 @@ body {
   html { 
     height: 100%;
     width: 100%;
+    overflow: hidden;
   }
 
   &,
@@ -21,6 +22,7 @@ body {
     padding: 0;
     transition-timing-function: $main-transition-timing-function;
     transition-duration: $main-transition-duration;
+    transition-property: none;
   }
 
   * {
@@ -35,4 +37,5 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
+  overflow: hidden;
 }
