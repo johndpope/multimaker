@@ -3,14 +3,37 @@
     .panel {
       background-color: $panel-color-bg;
       border: $panel-border;
+      border-radius: $panel-border-radius;
       padding: $panel-padding;
     }
 
     .toolbar {
+      box-shadow: $main-box-shadow;
       display: block;
       left: $toolbar-x;
       position: absolute;
       top: $toolbar-y;
+
+      .btn {
+        background-color: $toolbar-btn-bg-color;
+        background-origin: content-box;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border-radius: $toolbar-btn-border-radius;
+        display: block;
+        height: $toolbar-btn-h;
+        padding: $toolbar-btn-padding;
+        width: $toolbar-btn-w;
+
+        &:not(:first-child) {
+          margin-top: $panel-padding;
+        }
+
+        &.btn-draw {
+          background-image: url('../../assets/editor/pencil.svg');
+        }
+      }
     }
   }
 }

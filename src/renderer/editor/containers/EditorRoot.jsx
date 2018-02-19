@@ -5,7 +5,10 @@ export default class EditorRoot extends React.Component {
   render() {
     return <div className="root root-editor">
       <div className="panel toolbar">
-        <button className="btn"><img src="../assets/editor/pencil.svg" /></button>
+        <button className="btn btn-select"></button>
+        <button className="btn btn-draw"></button>
+        <button className="btn btn-erase"></button>
+        <button className="btn btn-pick"></button>
       </div>
     </div>;
   }

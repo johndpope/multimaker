@@ -1,9 +1,16 @@
 $main-color-bg: #000;
 $main-color-fg: #ddd;
+$main-box-shadow: 1vh 1vh 0 rgba(0, 0, 0, .5);
 
-$panel-color-bg: rgba(30, 30, 30, .8);
-$panel-border: #666 solid 3px;
-$panel-padding: 4px;
+$panel-color-bg: rgba(30, 30, 30, 1);
+$panel-border: 0;
+$panel-padding: .5vh;
+$panel-border-radius: 1.5vh;
 
-$toolbar-x: 16px;
-$toolbar-y: 20%;
+$toolbar-x: 2vh;
+$toolbar-y: 15vh;
+$toolbar-btn-w: 6vh;
+$toolbar-btn-h: 6vh;
+$toolbar-btn-padding: 1vh;
+$toolbar-btn-border-radius: 1vh;
+$toolbar-btn-bg-color: rgba(255, 255, 255, .1);
