@@ -4,6 +4,8 @@
       backdrop-filter: $panel-backdrop-filter;
       background-color: $panel-color-bg;
       border-radius: $panel-border-radius;
+      background-image: url('../../assets/editor/scanlines.png');
+      background-blend-mode: multiply;
       border: $panel-border;
       box-shadow: $main-box-shadow;
       mix-blend-mode: $panel-blend-mode;
@@ -40,6 +42,7 @@
         height: $toolbar-btn-h;
         padding: $toolbar-btn-padding;
         transition-property: $toolbar-transition-property;
+        opacity: .9;
         width: $toolbar-btn-w;
         
         &:not(:first-child) {

@@ -1,35 +1,36 @@
+$main-border-width: .36vh;
+$mbw: $main-border-width;
 $main-color-bg: #000;
 $main-color-fg: #ddd;
 $main-box-shadow:
-  0 0 0 .25vh #fff,
-  0 0 0 .5vh #000,
-  1.5vh 1.5vh 0 0 rgba(0,0,0,.5)
-  ;
+  0 0 0 $mbw #fff,
+  inset -2vh 0 14vh -2vh rgba(255, 255, 255, .5),
+  #{$mbw * 2} 0 #{$mbw * 6} #{$mbw * 2} rgba(0, 0, 0, 1);
 $main-box-shadow-hidden:
-  0 0 0 .25vh #000,
-  0 0 0 .5vh #000,
-  1.5vh 1.5vh 0 0 rgba(0,0,0,.5)
-  ;
+  0 0 0 $mbw #000,
+  inset 0 0 0 0 rgba(0, 0, 0, 0),
+  #{$mbw * 2} 0 #{$mbw * 2} rgba(0, 0, 0, .5);
 $main-transition-duration: 250ms;
 $main-transition-timing-function: ease-in-out;
 
 $panel-color-bg: rgba(30, 30, 30, 1);
 $panel-border: 0;
 $panel-padding: 1vh;
-$panel-border-radius: 1.5vh;
+$panel-border-radius: 1vh;
 $panel-blend-mode: luminosity;
 $panel-backdrop-filter: blur(.8vh);
 $panel-opacity: .9;
 
+$toolbar-btn-count: 6;
+$toolbar-btn-w: 12vh;
+$toolbar-btn-h: 15vh;
 $toolbar-x: 0;
-$toolbar-x-closed: -9vh;
-$toolbar-y: 15vh;
-$toolbar-btn-w: 10vh;
-$toolbar-btn-h: 10vh;
+$toolbar-x-closed: -10vh;
+$toolbar-y: 5vh;
 $toolbar-btn-padding: 1vh;
-$toolbar-btn-border-color: #fff;
+$toolbar-btn-border-color: #888;
 $toolbar-btn-border-color-hidden: #000;
-$toolbar-btn-border-width: .25vh;
+$toolbar-btn-border-width: $mbw;
 $toolbar-btn-border-style: solid;
 $toolbar-btn-bg-color: #fff;
 $toolbar-btn-bg-color-hidden: #000;
