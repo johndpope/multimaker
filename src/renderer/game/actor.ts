@@ -1,7 +1,8 @@
 // @ts-check
 import * as _ from 'lodash';
-import GameObject from 'phaser/src/gameobjects/GameObject';
 import { Room } from './rooms';
+
+type GameObject = any;
 
 export type ActorConfig = {
   /**

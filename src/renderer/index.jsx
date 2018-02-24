@@ -1,17 +1,12 @@
-const path = require('path');
-const { argv } = require('electron').remote.process;
-const React = require('react');
-const ReactDOM = require('react-dom');
-const { AppContainer } = require('react-hot-loader');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import Game from './game';
 
-// FIXME: These should available already
-window.WEBGL_RENDERER = true;
-window.CANVAS_RENDERER = true;
-// FIXME: MUST be imported this way so the fix above will work
-const { default: Game } = require('./game');
+import './styles/index.scss';
 
 const game = new Game(
-  path.resolve(argv[2]),
+  '/assets/projects/antispace',
   document.getElementById('game-root')
 );
 

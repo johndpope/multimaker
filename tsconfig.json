@@ -4,8 +4,9 @@
     "allowJs": true,
     "experimentalDecorators": true,
     "target": "es6",
-    "checkJs": true,
+    "checkJs": false,
     "moduleResolution": "node",
-    "jsx": "react"
+    "jsx": "react",
+    "sourceMap": true
   }
 }

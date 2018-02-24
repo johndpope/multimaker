@@ -4,7 +4,7 @@
       backdrop-filter: $panel-backdrop-filter;
       background-color: $panel-color-bg;
       border-radius: $panel-border-radius;
-      background-image: url('../../assets/editor/scanlines.png');
+      background-image: url('/assets/editor/scanlines.png');
       background-blend-mode: multiply;
       border: $panel-border;
       box-shadow: $main-box-shadow;
@@ -66,7 +66,7 @@
         }
 
         &::before {
-          -webkit-mask-image: url('../../assets/editor/none.svg');
+          -webkit-mask-image: url('/assets/editor/none.svg');
           -webkit-mask-origin: content-box;
           -webkit-mask-position: center;
           -webkit-mask-repeat: no-repeat;
@@ -80,7 +80,7 @@
         }
 
         &.btn-draw::before {
-          -webkit-mask-image: url('../../assets/editor/pencil.svg');
+          -webkit-mask-image: url('/assets/editor/pencil.svg');
         }
       }
     }
