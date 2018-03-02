@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "bourbon": "^5.0.0",
-    "electron-prebuilt-compile": "^1.7.11",
     "es6-promisify": "^5.0.0",
     "express": "^4.16.2",
     "lodash": "^4.17.4",
