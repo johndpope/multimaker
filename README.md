@@ -4,10 +4,17 @@ Inspired by recent "maker" projects such as Mario Maker and Mega Maker, this pro
 
 Asana: https://app.asana.com/0/523303564324416/list
 
-## How do I get set up?
+## Getting Started
+
+The app is designed to work like a project runner/compiler in that it takes a given project path/URL as a parameter argument and loads data and assets from that location into the game/editor engine to produce the game's appearance and behavior in the window. (This is similar to how a browser can be pointed to a URL.)
+
+Currently, the app is hard-coded to load the game's example project, **Antispace**, which is a port of an old Game Maker demo I created in 2013. The ability to load other projects is mostly complete, but currently disabled since there aren't currently any other Multimaker-compatible projects in existence.
+
+To run the app:
 
 - Install latest node and npm
 - Install Yarn
+- Since SASS is involved, you will also need to set up [node-gyp](https://www.npmjs.com/package/node-gyp)
 - `git clone` the repo
 - `cd` into repo
 - run `yarn`
@@ -61,36 +68,33 @@ Maps each actor type to the assets used by that type. Each asset type is organiz
 Property definitions for each actor type. The definitions include the names, data types, and default values of each property. The JSON file is stored in a format that is compatible with the format used by Tiled's object type editor view.
 
 ##### `./assets/projects/antispace/`
-The Antispace base project.
+The Antispace base project. Multi-Maker is currently hard-coded to load this when started.
 
 #### `./src/`
 All JavaScript, HTML, and CSS source code that runs when the application is executed.
 
-###### `./src/main/index.js`
-The Electron main entry point. Responsible for creating the main window and a few other low-level things.
+##### `./src/client/`
+Code that is executed in the browser.
 
-##### `./src/renderer/`
-Code that is executed in Electron's rendering thread.
-
-###### `./src/renderer/game/`
+###### `./src/client/game/`
 Code that governs what happens in the game part of the application apart from the editor functionality.
 
-###### `./src/renderer/game/index.js`
+###### `./src/client/game/index.js`
 This might be described as the entry point for the game, which is loaded by rendering thread at the same time as the editor overlay.
 
-###### `./src/renderer/game/actors/`
+###### `./src/client/game/actors/`
 Contains the different actor types. All actor types must be exported from the `index.js` in order to be usable from map files.
 
-##### `./src/renderer/index.js`
-The entry point for the Electron rendering thread.
+##### `./src/client/index.jsx`
+The entry point for the React app that initializes and mediates between the game and editor.
 
-##### `./src/renderer/style.css`
-Main stylesheet for index.html. At some point this file should probably be split up into smaller components.
+##### `./src/client/styles/`
+SASS style sheets.
 
-###### `./src/renderer/index.html`
-Describes the content of the main window.
+###### `./src/client/index.html`
+Describes the base layout of the window.
 
-## Project Structure
+## Project Concepts
 
 ### Rooms and Actors
 This engine uses a mechanism to organize controller logic based on the idea of "Rooms" and "Actors". This concept runs parallel with Phaser's own concept of "Scenes" and "GameObjects," but is distinct from them.
