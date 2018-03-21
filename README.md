@@ -126,3 +126,9 @@ Rooms are loaded using the **room manager**. The room manager is an instance of 
 
 ##### Master Room
 The **master room** is the first room loaded by the game and is used to map out the relationship between the rest of the rooms, plus indicate the location and configuration of a few special objects (such as the player). It is populated primarily with "room boundaries", which are Actors that serve as invisible boundaries of every other room in the game.
+
+## Credits
+
+The game engine is built on top of [Phaser 3](https://phaser.io) by [Photon Storm](http://photonstorm.com).
+
+Music playback is provided using source code modified from (Flod)(http://www.photonstorm.com/flod).
