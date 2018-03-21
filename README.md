@@ -2,7 +2,7 @@
 
 Inspired by recent "maker" projects such as Mario Maker and Mega Maker, this project continues the trend of specialized game content makers with "MM" abbreviations. No particular franchise is being targeted, but the gameplay style should be similar to Metroid and the like.
 
-Asana: https://app.asana.com/0/523303564324416/list
+Asana: https://app.asana.com/0/603435355015752/603435355015752
 
 ## Getting Started
 
