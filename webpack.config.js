@@ -5,8 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const APP_DIR = path.resolve(__dirname, 'src');
-const BUILD_DIR = path.resolve(__dirname, 'public');
+const SRC_DIR = path.resolve(__dirname, 'src');
+const BUILD_DIR = path.resolve(__dirname, 'build');
 
 const extractSass = new ExtractTextPlugin({
   filename: "[name].[contenthash].css",
@@ -14,10 +14,10 @@ const extractSass = new ExtractTextPlugin({
 });
 
 module.exports = {
-  entry: path.resolve(APP_DIR, 'renderer' , 'index.jsx'),
+  entry: path.resolve(SRC_DIR, 'client' , 'index.jsx'),
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js',
+    filename: 'app.js',
     publicPath: '/',
   },
   module: {
@@ -46,15 +46,15 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [APP_DIR, 'node_modules'],
+    modules: [SRC_DIR, 'node_modules'],
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css', '.scss']
   },
   devtool: 'inline-source-map',
   plugins: [
-    new CleanWebpackPlugin(['public']),
+    new CleanWebpackPlugin(['build']),
     new HtmlWebpackPlugin({
       title: 'Multi-Maker',
-      template: 'src/index.html',
+      template: 'src/client/index.html',
     }),
     extractSass
   ]

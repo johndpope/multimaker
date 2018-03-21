@@ -6,21 +6,26 @@ Asana: https://app.asana.com/0/523303564324416/list
 
 ## How do I get set up?
 
-This app is based on Electron, but it uses Webpack for development.
-
-To run:
-
-- Install latest node 8.x and npm
+- Install latest node and npm
 - Install Yarn
 - `git clone` the repo
 - `cd` into repo
 - run `yarn`
-- run `yarn dev`
+- run `yarn start`
+- Open your web browser to http://localhost:8080
+- You will see a blank screen, but wait a moment and everything will load.
+- Use the "S", "D" and arrow keys to control the character.
+- Notice the slide-out tool bar on the left which appears when you move the mouse pointer to the left edge of the window. It doesn't do anything currently, but this is planned to be the place where users can select the current function of the mouse.
+
+> **NOTE:** Some parts of the UI are using features that are specific to Google Chrome. It will render in Firefox and Microsoft Edge as well, but there may be some graphical glitches.
 
 ## Repository Structure
 
 ### `./assets/`
 Files not bundled into the Webpack bundle but loaded as-is
+
+#### `./assets/editor/`
+Assets used by the editor layer, not the game.
 
 #### `./assets/projects/`
 Contains base projects from which new projects can be made.
@@ -61,12 +66,6 @@ The Antispace base project.
 #### `./src/`
 All JavaScript, HTML, and CSS source code that runs when the application is executed.
 
-##### `./src/main`
-Code that is executed in the main Electron thread.
-
-###### `./src/main/index.html`
-Describes the content of the main window in production builds.
-
 ###### `./src/main/index.js`
 The Electron main entry point. Responsible for creating the main window and a few other low-level things.
 
@@ -87,6 +86,9 @@ The entry point for the Electron rendering thread.
 
 ##### `./src/renderer/style.css`
 Main stylesheet for index.html. At some point this file should probably be split up into smaller components.
+
+###### `./src/renderer/index.html`
+Describes the content of the main window.
 
 ## Project Structure
 

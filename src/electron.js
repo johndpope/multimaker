@@ -1,4 +1,8 @@
-// @ts-check
+/*
+ * This file is remnant from an earlier point in the project when the app ran in
+ * an Electron window. This feature will return in the future, so this file is
+ * retained for reference.
+ */
 
 import url from 'url'
 import path from 'path'
