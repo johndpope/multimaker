@@ -1,7 +1,7 @@
 {
   "name": "multimaker",
   "version": "0.1.0",
-  "description": "Generic maker-type game",
+  "description": "A self-editable game in the style of Super Mario Maker and Mega Maker, but not specific to any existing franchise.",
   "main": "src/index.js",
   "scripts": {
     "start": "yarn start:server",
