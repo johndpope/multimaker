@@ -2,8 +2,6 @@
 
 Inspired by recent "maker" projects such as Mario Maker and Mega Maker, this project continues the trend of specialized game content makers with "MM" abbreviations. No particular franchise is being targeted, but the gameplay style should be similar to Metroid and the like.
 
-Asana: https://app.asana.com/0/603435355015752/603435355015752
-
 ## Getting Started
 
 The app is designed to work like a project runner/compiler in that it takes a given project path/URL as a parameter argument and loads data and assets from that location into the game/editor engine to produce the game's appearance and behavior in the window. (This is similar to how a browser can be pointed to a URL.)
@@ -47,7 +45,7 @@ Animation definitions.
 Images that serve as background in the current project.
 
 ###### `./assets/projects/{project}/tm/`
-Tiled-compatible .json maps. Currently the tilesets must be embedded because Phaser does not support external tilesets.
+[Tiled](http://www.mapeditor.org/)-compatible .json maps. Currently the tilesets must be embedded because Phaser does not support external tilesets.
 
 ###### `./assets/projects/{project}/sp/`
 Images that are used as sprite sheets and the .json texture atlases that go with them. The .json atlases must match the name of the sprite image file.
