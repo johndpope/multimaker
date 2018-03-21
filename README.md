@@ -10,8 +10,8 @@ Currently, the app is hard-coded to load the game's example project, **Antispace
 
 To run the app:
 
-- Install latest node and npm
-- Install Yarn
+- Install [Node.js](http://nodejs.org/)
+- Install [Yarn](http://yarnpkg.com)
 - Since SASS is involved, you will also need to set up [node-gyp](https://www.npmjs.com/package/node-gyp)
 - `git clone` the repo
 - `cd` into repo
