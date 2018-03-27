@@ -13,6 +13,12 @@ const extractSass = new ExtractTextPlugin({
   disable: process.env.NODE_ENV === "development"
 });
 
+const definePlugin = new webpack.DefinePlugin({
+  __DEV__ : JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
+  WEBGL_RENDERER: true,
+  CANVAS_RENDERER: true
+});
+
 module.exports = {
   entry: path.resolve(SRC_DIR, 'client' , 'index.jsx'),
   output: {
@@ -42,6 +48,10 @@ module.exports = {
           ],
           fallback: 'style-loader',
         }),
+      },
+      {
+        test: [/\.vert$/, /\.frag$/],
+        use: 'raw-loader'
       }
     ]
   },
@@ -56,6 +66,7 @@ module.exports = {
       title: 'Multi-Maker',
       template: 'src/client/index.html',
     }),
-    extractSass
+    extractSass,
+    definePlugin,
   ]
 };

@@ -1,7 +1,7 @@
 // @ts-check
 import * as path from 'path';
 import * as _ from 'lodash';
-import Phaser from 'phaser/dist/phaser';
+import Scene from 'phaser/src/scene/Scene';
 import Actor, { ActorClass } from './actor';
 
 /**
@@ -56,7 +56,7 @@ import Actor, { ActorClass } from './actor';
  */
 export class RoomManager {
   /**
-   * @param {Phaser.Scene} scene
+   * @param {Scene} scene
    * @param {ActorClassMap} classes
    * @param {ActorManifestAssetMap} assets
    * @param {ActorManifestPropertyListEntry[]} propertyList

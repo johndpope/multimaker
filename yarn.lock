@@ -1875,7 +1875,7 @@ eventemitter3@1.x.x:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
 
-eventemitter3@^3.0.0:
+eventemitter3@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.0.1.tgz#4ce66c3fc5b5a6b9f2245e359e1938f1ab10f960"
 
@@ -3863,10 +3863,10 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
 phaser@^3.1.1:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/phaser/-/phaser-3.1.2.tgz#285f2f15ba811e9ac8255ba2fb0d130b67a80b4d"
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/phaser/-/phaser-3.3.0.tgz#9b9132fb973f280cce38c842db173569c6c05af1"
   dependencies:
-    eventemitter3 "^3.0.0"
+    eventemitter3 "^3.0.1"
 
 pify@^2.0.0:
   version "2.3.0"
@@ -4299,6 +4299,10 @@ raw-body@2.3.2:
     http-errors "1.6.2"
     iconv-lite "0.4.19"
     unpipe "1.0.0"
+
+raw-loader@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
 
 rc@^1.1.7:
   version "1.2.5"

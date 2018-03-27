@@ -2,13 +2,15 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import * as _ from 'lodash';
-import Phaser from 'phaser/dist/phaser';
+import Phaser from 'phaser';
+import Game_ from 'phaser/src/boot/Game';
+import Scene from 'phaser/src/scene/Scene';
 import flod from '../flod/index';
 
 import actors from './actors/index';
 import { RoomManager } from './rooms';
 
-export default class Game extends Phaser.Game {
+export default class Game extends Game_ {
   /**
    * @param {string} projectPath Absolute path to the project to be opened
    * @param {HTMLElement} parent HTML element into which the Phaser canvas will be inserted
