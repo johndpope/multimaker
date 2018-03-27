@@ -131,4 +131,4 @@ The **master room** is the first room loaded by the game and is used to map out 
 
 The game engine is built on top of [Phaser 3](https://phaser.io) by [Photon Storm](http://photonstorm.com).
 
-Music playback is provided using source code modified from (Flod)(http://www.photonstorm.com/flod).
+Music playback is provided using source code modified from [Flod](http://www.photonstorm.com/flod).
