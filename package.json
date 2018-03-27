@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/es6-promisify": "^5.0.0",
     "@types/express": "^4.11.1",
-    "@types/lodash": "^4.14.93",
+    "@types/lodash": "^4.14.106",
     "@types/node": "^9.3.0",
     "@types/react": "^16.0.35",
     "@types/react-dom": "^16.0.3",
@@ -37,7 +37,7 @@
     "bourbon": "^5.0.0",
     "es6-promisify": "^5.0.0",
     "express": "^4.16.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.5",
     "phaser": "^3.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

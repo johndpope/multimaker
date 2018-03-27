@@ -2,73 +2,78 @@
 import * as path from 'path';
 import * as _ from 'lodash';
 import Scene from 'phaser/src/scene/Scene';
+import GameObject from 'phaser/src/gameobjects/GameObject';
+import Tileset from 'phaser/src/tilemaps/Tileset';
+import DynamicTilemapLayer from 'phaser/src/tilemaps/dynamiclayer/DynamicTilemapLayer';
+import Tilemap from 'phaser/src/tilemaps/Tilemap';
 import Actor, { ActorClass } from './actor';
+import { RoomBoundary } from './actors';
 
 /**
- * @typedef {{[key: string]: ActorManifestEntry}} ActorManifest Describes how tilemap data should be used to load scene content
+ * Describes how tilemap data should be used to load scene content
  */
+type ActorManifest = { [key: string]: ActorManifestEntry };
+type ActorManifestEntry = {
+  /** Actor class/constructor */
+  class: ActorClass;
 
-/**
- * @typedef {Object} ActorManifestEntry
- * @prop {ActorClass} class Actor class/constructor
- * @prop {ActorManifestAssetMapEntry} assets Asset map associated with class
- * @prop {ActorManifestPropertyMap} properties Default properties
- */
+  /** Asset map associated with class */
+  assets: ActorManifestAssetMapEntry;
 
-/**
- * @typedef {{[key: string]: ActorClass}} ActorClassMap
- */
-
-/**
- * @typedef {{[key: string]: ActorManifestAssetMapEntry}} ActorManifestAssetMap
- */
-
-/**
- * @typedef {Object} ActorManifestAssetMapEntry
- * @prop {string[]} an Animations
- * @prop {string[]} so Sounds
- * @prop {string[]} sp Sprites (atlas + image)
- */
-
-/**
- * @typedef {{[key: string]: (string|number|boolean)}} ActorManifestPropertyMap
- */
-
-/**
- * @typedef {Object} ActorManifestPropertyListEntry
- * @prop {string} name
- * @prop {ActorManifestPropertyDef[]} properties
- */
-
-/**
- * @typedef {Object} ActorManifestPropertyDef
- * @prop {string} name
- * @prop {ActorManifestPropertyDefType} type
- * @prop {string} value
- */
-
-/**
- * @typedef {("string"|"number"|"boolean")} ActorManifestPropertyDefType
- */
+  /** Default propertires */
+  properties: ActorManifestPropertyMap;
+}
+type ActorClassMap = { [key: string]: ActorClass };
+type ActorManifestAssetMap = { [key: string]: ActorManifestAssetMapEntry };
+type ActorManifestAssetMapEntry = {
+  /** Animations */
+  an: string[];
+  /** Sounds */
+  so: string[];
+  /** Sprites (atlas + image) */
+  sp: string[];
+}
+type ActorManifestPropertyMap = { [key: string]: (string | number | boolean) };
+type ActorManifestPropertyListEntry = {
+  name: string;
+  properties: ActorManifestPropertyDef[];
+}
+type ActorManifestPropertyDef = {
+  name: string;
+  type: ActorManifestPropertyDefType;
+  value: string;
+}
+type ActorManifestPropertyDefType = ("string" | "int" | "float" | "bool");
 
 /**
  * Room manager.
  */
 export class RoomManager {
+  rooms: {[key: string]: Room};
+  manifest: ActorManifest;
+
   /**
    * @param {Scene} scene
    * @param {ActorClassMap} classes
    * @param {ActorManifestAssetMap} assets
    * @param {ActorManifestPropertyListEntry[]} propertyList
    */
-  constructor(scene, classes, assets, propertyList) {
+  constructor(
+    public scene: Scene,
+    classes: ActorClassMap,
+    assets: ActorManifestAssetMap,
+    propertyList: ActorManifestPropertyListEntry[]
+  ) {
     this.scene = scene;
-    /** @type {{[key: string]: Room}} */
     this.rooms = {};
     this.setupManifest(classes, assets, propertyList);
   }
-  setupManifest(classes, assets, propertyList) {
-    const propertyDefs =
+  setupManifest(
+    classes: ActorClassMap,
+    assets: ActorManifestAssetMap,
+    propertyList: ActorManifestPropertyListEntry[]
+  ) {
+    const propertyDefs : {[key: string]: ActorManifestPropertyDef[]} =
     _.transform(propertyList, (m, { name, properties }) => {
       m[name] = properties;
     }, {});
@@ -85,7 +90,7 @@ export class RoomManager {
           (type === 'bool') ? !!value :
           null;
         }, {})
-      };
+      } as ActorManifestEntry;
     }, {});
   }
   /**
@@ -109,22 +114,19 @@ export class RoomManager {
  * See the README for details about how Rooms work.
  */
 export class Room {
-  /**
-   * @param {RoomManager} manager 
-   * @param {string} key 
-   * @param {number} [x]
-   * @param {number} [y]
-   */
-  constructor(manager, key, x=0, y=0) {
-    this.manager = manager;
-    this.key = key;
-    this.x = x;
-    this.y = y;
-    this.images = [];
-    this.tilesets = [];
-    this.layers = [];
-    /** @type {Actor[]} */
-    this.actors = [];
+  images: GameObject[] = [];
+  tilesets: Tileset[] = [];
+  layers: DynamicTilemapLayer[] = [];
+  actors: Actor[] = [];
+  boundary: RoomBoundary;
+  tilemap: Tilemap;
+
+  constructor(
+    public manager: RoomManager,
+    public key: string,
+    public x: number = 0,
+    public y: number = 0
+  ) {
     this.setupBoundary();
     this.setupTilemap();
     const { data } = this.manager.scene.cache.tilemap.get(this.key);
@@ -133,9 +135,9 @@ export class Room {
     this.setupLoad();
   }
   setupBoundary() {
-    const { key, manager: { rooms: { master } } } = this;
-    this.boundary =
-      master && _.find(master.actors, { type: "RoomBoundary", key }) || null;
+    const { key, manager: { rooms: { master, master: { actors } } } } = this;
+    const type = 'RoomBoundary';
+    this.boundary = (master && _.find(actors, { type, key })) || null;
   }
   
   // TODO: Add a group for the room?
@@ -261,6 +263,9 @@ export class Room {
     this.actors.forEach(actor => {
       actor.update();
     })
+  }
+  getOneByType<T extends Actor>(t: new(...args: any[]) => T) {
+    return this.actors.find(g => g instanceof t) as T;
   }
 }
 

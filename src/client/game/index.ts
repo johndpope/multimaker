@@ -7,15 +7,26 @@ import Game_ from 'phaser/src/boot/Game';
 import Scene from 'phaser/src/scene/Scene';
 import flod from '../flod/index';
 
-import actors from './actors/index';
-import { RoomManager } from './rooms';
+import * as actors from './actors/index';
+import { Room, RoomManager } from './rooms';
+
+// TODO: These should be removable after Phaser type defs are in place
+import LoaderPlugin from 'phaser/src/loader/LoaderPlugin';
+import CacheManager from 'phaser/src/cache/CacheManager';
+import CameraManager from 'phaser/src/cameras/2d/CameraManager';
+import BaseSoundManager from 'phaser/src/sound/BaseSoundManager';
+import GameObjectFactory from 'phaser/src/gameobjects/GameObjectFactory';
+import GroupFactory from 'phaser/src/gameobjects/group/GroupFactory';
+import AnimationManager from 'phaser/src/animations/AnimationManager';
+import InputManager from 'phaser/src/input/InputManager';
 
 export default class Game extends Game_ {
+
   /**
    * @param {string} projectPath Absolute path to the project to be opened
    * @param {HTMLElement} parent HTML element into which the Phaser canvas will be inserted
    */
-  constructor(projectPath, parent) {
+  constructor(projectPath: string, parent: HTMLElement) {
     super({
       parent,
       type: Phaser.WEBGL,
@@ -38,15 +49,32 @@ export default class Game extends Game_ {
 }
   
 class RootScene extends Phaser.Scene {
+  player: actors.Player;
+  rooms: RoomManager;
+
+  // TODO: Temporary
+  area_0_0: Room;
+  
+  // TODO: These should be defined automatically by Phaser type defs
+  load: LoaderPlugin;
+  cache: CacheManager;
+  cameras: CameraManager;
+  sound: BaseSoundManager;
+  add: GameObjectFactory;
+  groups: GroupFactory;
+  input: InputManager;
+  anims: AnimationManager;
+  keyInputs: any;
+
   /**
    * @param {string} projectPath Absolute path to the project to be opened
    */
-  constructor(projectPath) {
+  constructor(public projectPath: string) {
     super();
-    this.projectPath = projectPath;
   }
   init() {
     // DEBUG: Expose scene globally
+    // @ts-ignore
     window.scene = this;
   }
   preload() {
@@ -148,7 +176,7 @@ class RootScene extends Phaser.Scene {
     this.rooms = new RoomManager(this, actors, assets, properties);
     // TODO: Load the master room instead of an arbitrary area
     this.area_0_0 = this.rooms.load('area_0_0');
-    this.player = this.area_0_0.actors.find(g => g instanceof actors.Player);
+    this.player = this.area_0_0.getOneByType(actors.Player);
     this.cameras.main.startFollow(this.player.gameObjects.main);
     this.cameras.main.setBounds(
       this.area_0_0.x,

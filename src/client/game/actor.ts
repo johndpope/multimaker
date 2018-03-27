@@ -29,12 +29,12 @@ export type ActorConfig = {
   /**
    * Map of arrays of animations for each game object
    */
-  animations: { [key: string]: string[] };
+  animations?: { [key: string]: string[] };
 
   /**
    * Array of the names of groups the main config should be added to
    */
-  groups: string[];
+  groups?: string[];
   /**
    * Externally-configurable properties
    */
@@ -50,8 +50,6 @@ export type ActorClass = new(cfg: ActorConfig) => Actor;
  * 
  * This is not a GameObject itself and it does not directly appear inside of any
  * scenes.
- * 
- * @prop {{[key: string]: GameObject}} gameObjects
  */
 export default class Actor {
   room: Room;
