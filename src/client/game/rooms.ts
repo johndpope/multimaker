@@ -7,7 +7,6 @@ import Tileset from 'phaser/src/tilemaps/Tileset';
 import DynamicTilemapLayer from 'phaser/src/tilemaps/dynamiclayer/DynamicTilemapLayer';
 import Tilemap from 'phaser/src/tilemaps/Tilemap';
 import Actor, { ActorClass } from './actor';
-import { RoomBoundary } from './actors';
 
 /**
  * Describes how tilemap data should be used to load scene content
@@ -49,26 +48,11 @@ type ActorManifestPropertyDefType = ("string" | "int" | "float" | "bool");
  * Room manager.
  */
 export class RoomManager {
-  rooms: {[key: string]: Room};
+  rooms: {[key: string]: Room} = {};
   manifest: ActorManifest;
 
-  /**
-   * @param {Scene} scene
-   * @param {ActorClassMap} classes
-   * @param {ActorManifestAssetMap} assets
-   * @param {ActorManifestPropertyListEntry[]} propertyList
-   */
   constructor(
     public scene: Scene,
-    classes: ActorClassMap,
-    assets: ActorManifestAssetMap,
-    propertyList: ActorManifestPropertyListEntry[]
-  ) {
-    this.scene = scene;
-    this.rooms = {};
-    this.setupManifest(classes, assets, propertyList);
-  }
-  setupManifest(
     classes: ActorClassMap,
     assets: ActorManifestAssetMap,
     propertyList: ActorManifestPropertyListEntry[]
@@ -118,7 +102,6 @@ export class Room {
   tilesets: Tileset[] = [];
   layers: DynamicTilemapLayer[] = [];
   actors: Actor[] = [];
-  boundary: RoomBoundary;
   tilemap: Tilemap;
 
   constructor(
@@ -127,17 +110,11 @@ export class Room {
     public x: number = 0,
     public y: number = 0
   ) {
-    this.setupBoundary();
     this.setupTilemap();
     const { data } = this.manager.scene.cache.tilemap.get(this.key);
     this.setupTilesets(data);
     this.setupLayers(data);
     this.setupLoad();
-  }
-  setupBoundary() {
-    const { key, manager: { rooms: { master, master: { actors } } } } = this;
-    const type = 'RoomBoundary';
-    this.boundary = (master && _.find(actors, { type, key })) || null;
   }
   
   // TODO: Add a group for the room?
@@ -264,7 +241,7 @@ export class Room {
       actor.update();
     })
   }
-  getOneByType<T extends Actor>(t: new(...args: any[]) => T) {
+  getOneByType<T extends Actor>(t: ActorClass<T>) {
     return this.actors.find(g => g instanceof t) as T;
   }
 }

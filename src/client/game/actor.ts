@@ -1,8 +1,6 @@
-// @ts-check
+import GameObject from 'phaser/src/gameobjects/GameObject';
 import * as _ from 'lodash';
 import { Room } from './rooms';
-
-type GameObject = any;
 
 export type ActorConfig = {
   /**
@@ -43,7 +41,7 @@ export type ActorConfig = {
 
 export type PropValue = (string | number | boolean);
 
-export type ActorClass = new(cfg: ActorConfig) => Actor;
+export type ActorClass<T = Actor> = new(cfg: ActorConfig) => T;
 
 /**
  * Controls Phaser GameObjects.
